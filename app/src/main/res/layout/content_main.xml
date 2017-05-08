@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.fedironics.imeter.imetercustomer.MainActivity"
+    tools:showIn="@layout/app_bar_main">
+
+    <EditText
+        android:id="@+id/editText"
+        style="custom_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteY="28dp"
+        tools:layout_editor_absoluteX="26dp" />
+
+    <EditText
+        android:id="@+id/editText2"
+        style="custom_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteY="83dp"
+        tools:layout_editor_absoluteX="26dp" />
+
+    <EditText
+        style="custom_edit_text"
+        android:id="@+id/editText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteY="148dp"
+        tools:layout_editor_absoluteX="26dp" />
+</android.support.constraint.ConstraintLayout>
