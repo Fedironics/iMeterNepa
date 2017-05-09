@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -61,7 +62,7 @@ public class LoginActivity extends AppCompatActivity  {
      */
     private String email ;
     private String password;
-
+public static final String PREFS_NAME = "login_values";
     public static final String platform_id = "slkfjdsldjfl";
     public static final String token = "slkfjosfjos";
     public String mssg = "Unable To Log In" ;
@@ -285,15 +286,15 @@ public class LoginActivity extends AppCompatActivity  {
                                 mssg = recievedObject.getString("error");
                                 return false;
                             }
-                            SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                            SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
                             SharedPreferences.Editor editor = sharedPref.edit();
                             editor.putString("lastname", recievedObject.getString("firstname"));
                             editor.putString("lastname", recievedObject.getString("lastname"));
-                            editor.putInt("userid", recievedObject.getInt("id"));
+                            editor.putInt(getResources().getString(R.string.userid_tag), recievedObject.getInt("id"));
                             editor.putString("phone", recievedObject.getString("phone"));
                             mssg = "Succesful Login";
 
-                            editor.commit();
+                            editor.apply();
                             return true;
 
                         }
@@ -323,7 +324,9 @@ public class LoginActivity extends AppCompatActivity  {
             showProgress(false);
 
             if (success) {
-                finish();
+                    Intent intent = new Intent(this.context,MainActivity.class);
+                    startActivity(intent);
+                    finish();
             } else {
                 //TODO : make an alternative error messaging system
                // mPasswordView.setError(mssg);

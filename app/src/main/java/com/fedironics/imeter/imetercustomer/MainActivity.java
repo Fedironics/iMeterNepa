@@ -1,5 +1,8 @@
 package com.fedironics.imeter.imetercustomer;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +22,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(!isLogged()){
+            Intent intent = new Intent(this,LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -52,6 +60,15 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    public boolean isLogged(){
+        //TODO: elaborate this function and make useful
+        SharedPreferences sharedPref =  getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        if(sharedPref.contains(getResources().getString(R.string.userid_tag))){
+            return true;
+        }
+        return false;
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
