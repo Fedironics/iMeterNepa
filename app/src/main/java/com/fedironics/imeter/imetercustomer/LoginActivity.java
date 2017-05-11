@@ -69,7 +69,6 @@ public class LoginActivity extends AppCompatActivity  {
     public static final String platform_id = "slkfjdsldjfl";
     public static final String token = "slkfjosfjos";
     public String mssg = "Unable To Log In" ;
-    public String link = "http://inkanimation.com?request=users";
 
 
     /**
@@ -242,53 +241,13 @@ public void gotoRegister(){
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = cm.getActiveNetworkInfo();
-            if (netInfo != null && netInfo.isConnected()) {
-
-                try {
-                    // Simulate network access.
-
-                    URL url = new URL(link);
-                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-                    urlc.setConnectTimeout(3000);
-                    urlc.connect();
-                    URL postUrl = new URL(link);
-                    String data  = URLEncoder.encode("platform_id", "UTF-8")
-                            + "=" + URLEncoder.encode(platform_id, "UTF-8");
-                    data += "&" + URLEncoder.encode("secret", "UTF-8")
-                            + "=" + URLEncoder.encode(token, "UTF-8");
-                    data += "&" + URLEncoder.encode("method", "UTF-8")
-                            + "=" + URLEncoder.encode("authenticate", "UTF-8");
-                    data += "&" + URLEncoder.encode("username", "UTF-8")
-                            + "=" + URLEncoder.encode(mEmail, "UTF-8");
-                    data += "&" + URLEncoder.encode("password", "UTF-8")
-                            + "=" + URLEncoder.encode(mPassword, "UTF-8");
-                    URLConnection conn = postUrl.openConnection();
-
-                    conn.setDoOutput(true);
-                    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-
-                    wr.write( data );
-                    wr.flush();
-
-                    BufferedReader reader = new BufferedReader(new
-                            InputStreamReader(conn.getInputStream()));
-
-                    StringBuilder sb = new StringBuilder();
-                    String line = null;
-
-                    // Read Server Response
-                    while((line = reader.readLine()) != null) {
-                        sb.append(line);
-                        break;
-                    }
-
-                    mssg = sb.toString();
-
-                    if (urlc.getResponseCode() == 200) {
-                        try {
-                            JSONObject recievedObject = new JSONObject(sb.toString());
+            ConnectivityManager con =(ConnectivityManager)  getSystemService(Context.CONNECTIVITY_SERVICE);
+            APIManager imeterApi = new APIManager(con);
+            imeterApi.addPostValue("method","authenticate");
+            imeterApi.addPostValue("username",mEmail);
+            imeterApi.addPostValue("password",mPassword);
+            JSONObject recievedObject = imeterApi.execute();
+            try {
                             if(recievedObject.has("error")){
                                 mssg = recievedObject.getString("error");
                                 return false;
@@ -308,18 +267,7 @@ public void gotoRegister(){
                         catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        return false;
-                    }
-                }catch(MalformedURLException e1){
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }catch(IOException e){
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
 
-                return false;
-            }
             mssg= "Unable to recieve data";
             // TODO: register the new account here.
             return false;
