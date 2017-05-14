@@ -61,12 +61,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     public boolean isLogged(){
+
         //TODO: elaborate this function and make useful
-        SharedPreferences sharedPref =  getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        if(sharedPref.contains(getResources().getString(R.string.userid_tag))){
-            return true;
-        }
+//        SharedPreferences sharedPref =  getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
+//        SharedPreferences.Editor editor = sharedPref.edit();
+//        if(sharedPref.contains(getResources().getString(R.string.userid_tag))){
+//            return true;
+//        }
         return false;
     }
     @Override

@@ -242,12 +242,16 @@ public void gotoRegister(){
         @Override
         protected Boolean doInBackground(Void... params) {
             ConnectivityManager con =(ConnectivityManager)  getSystemService(Context.CONNECTIVITY_SERVICE);
-            APIManager imeterApi = new APIManager(con);
+            APIManager imeterApi = new APIManager(con,null);
             imeterApi.addPostValue("method","authenticate");
             imeterApi.addPostValue("username",mEmail);
             imeterApi.addPostValue("password",mPassword);
             JSONObject recievedObject = imeterApi.execute();
             try {
+                if(recievedObject==null){
+                    mssg = "server response empty";
+                    return false;
+                }
                             if(recievedObject.has("error")){
                                 mssg = recievedObject.getString("error");
                                 return false;
@@ -269,7 +273,6 @@ public void gotoRegister(){
                         }
 
             mssg= "Unable to recieve data";
-            // TODO: register the new account here.
             return false;
         }
 
@@ -283,9 +286,6 @@ public void gotoRegister(){
                 startActivity(intent);
                 finish();
             } else {
-                //TODO : make an alternative error messaging system
-                // mPasswordView.setError(mssg);
-                // mPasswordView.requestFocus();
                 Snackbar.make(mProgressView, mssg, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 

@@ -26,10 +26,11 @@ public class APIManager {
     public static final String token = "slkfjosfjos";
     public boolean isConnected;
     public JSONObject result;
-    public String link;
+    public String link= "http://inkanimation.com";
     private URL url;
+    public int paramCount = 0;
     private URLConnection urlc;
-    public String query;
+    public String query="";
     public int responseCode;
     public String responseText;
 
@@ -37,13 +38,19 @@ public class APIManager {
     public APIManager(ConnectivityManager cm,String link){
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         this.isConnected = netInfo.isConnected();
-        this.link=link;
+        if(link!=null) {
+            this.link = link;
+        }
         connect();
     }
     public void addPostValue(String key, String value){
         try {
+            if(paramCount>1){
+                this.query += "&";
+            }
             this.query+= URLEncoder.encode(key,"UTF-8")
-            + "=" + URLEncoder.encode(value, "UTF-8");
+                    + "=" + URLEncoder.encode(value, "UTF-8");
+            paramCount++;
         }
         catch (UnsupportedEncodingException e3){
             e3.printStackTrace();
@@ -65,35 +72,36 @@ public class APIManager {
 
         }
     }
-public JSONObject execute(){
-    try {
-        this.urlc = url.openConnection();
-        this.urlc.setConnectTimeout(5000);
-        this.urlc.setDoOutput(true);
-        OutputStreamWriter wr = new OutputStreamWriter(this.urlc.getOutputStream());
-        wr.write( this.query );
-        wr.flush();
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(this.urlc.getInputStream())
-        );
-        StringBuilder sb = new StringBuilder();
-        String line = null;
-        // Read Server Response
-        while((line = reader.readLine()) != null) {
-            sb.append(line);
-            break;
+    public JSONObject execute(){
+        try {
+            this.urlc = url.openConnection();
+            this.urlc.setConnectTimeout(5000);
+            this.urlc.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(this.urlc.getOutputStream());
+            wr.write( this.query );
+            wr.flush();
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(this.urlc.getInputStream())
+            );
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            // Read Server Response
+            while((line = reader.readLine()) != null) {
+                sb.append(line);
+                break;
+            }
+            responseText = sb.toString();
+            JSONObject result = new JSONObject(responseText);
+            this.result = result;
+            paramCount = 0;
         }
-        responseText = sb.toString();
-        JSONObject result = new JSONObject(responseText);
-        this.result = result;
+        catch (IOException e4){
+            e4.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
-    catch (IOException e4){
-        e4.printStackTrace();
-    } catch (JSONException e) {
-        e.printStackTrace();
-    }
-    return result;
-}
 
 
 
