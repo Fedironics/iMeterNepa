@@ -42,7 +42,6 @@ public class DownloaderService extends Service {
         public Updater() {
             super("UpdaterService-Updater");
         }
-    }
 
     public void run() { //
         DownloaderService updaterService = DownloaderService.this;
