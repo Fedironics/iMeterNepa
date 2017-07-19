@@ -16,7 +16,7 @@
     <string name="sign_up">Register</string>
     <string name="password_again">Repeat Password</string>
     <string name="sharedPref">login_details</string>
-    <string name="sign_up_text">Don\'t have an account? Sign Up</string>
+    <string name="sign_up_text">Don\'t have an account?</string>
     <string name="title_activity_main">EEDC Utility App</string>
     <string name="userid_tag">userid</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

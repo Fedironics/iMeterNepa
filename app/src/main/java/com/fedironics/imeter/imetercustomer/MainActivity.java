@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.fragment_container,new ComplaintFragment()).commit();
 
         } else if (id == R.id.nav_settings) {
-
+logout();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
