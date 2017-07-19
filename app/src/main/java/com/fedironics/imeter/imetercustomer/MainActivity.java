@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if(!isLogged()){
-            Intent intent = new Intent(this,LoginActivity.class);
-            startActivity(intent);
-            finish();
+//            Intent intent = new Intent(this,LoginActivity.class);
+//            startActivity(intent);
+//            finish();
         }
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

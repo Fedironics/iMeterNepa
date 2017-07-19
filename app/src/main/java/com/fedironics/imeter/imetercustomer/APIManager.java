@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,7 +35,9 @@ public class APIManager {
     public int responseCode;
     public String responseText;
 
-
+    public void setLink(String link){
+        this.link = link;
+    }
     public APIManager(ConnectivityManager cm,String link){
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         this.isConnected = netInfo.isConnected();

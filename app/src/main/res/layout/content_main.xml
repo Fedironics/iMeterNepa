@@ -1,28 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.fedironics.imeter.imetercustomer.MainActivity"
     tools:showIn="@layout/app_bar_main">
-    <android.support.v7.widget.AppCompatEditText
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/mygradient"
+        android:orientation="vertical"
+        android:textColor="#ffffff">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/balance_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="40dp"
+            android:paddingTop="20dp"
+            android:text="Your Balance"
+            android:textAllCaps="true"
+            android:textColor="#c8ffffff"
+            android:textSize="17sp" />
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:id="@+id/balance_value_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/balance_value"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_weight="1"
+                android:paddingLeft="30dp"
+                android:paddingTop="10dp"
+                android:text="$20, 468"
+                android:textColor="#ffffff"
+                android:textSize="55sp" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="top"
+
+                android:layout_weight="2"
+                android:background="@drawable/curvedbackground"
+                android:foregroundGravity="top"
+                android:gravity="top|center_horizontal"
+                android:padding="5dp"
+                android:text="468"
+                android:textColor="#ffffff">
+
+                d
+            </android.support.v7.widget.AppCompatTextView>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Power Useage"
+                    android:textColor="#b6ffffff"
+                    android:textSize="17sp"
+                    app:textAllCaps="true" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="436Kw"
+                    android:textColor="#ffffff"
+                    android:textSize="17sp" />
+            </android.support.v7.widget.LinearLayoutCompat>
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="expense"
+                    android:textColor="#b6ffffff"
+                    android:textSize="17sp"
+                    app:textAllCaps="true" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="436Kw"
+                    android:textColor="#ffffff"
+                    android:textSize="17sp" />
+            </android.support.v7.widget.LinearLayoutCompat>
+        </android.support.v7.widget.LinearLayoutCompat>
+    </android.support.v7.widget.LinearLayoutCompat>
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="july 2016"/>
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="total useage"/>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:src="@drawable/flurry_julypulse_androidnewprojectstarts"
+        />
+    <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/custom_edit_text"
-        android:hint="Name"/>
-    <android.support.v7.widget.AppCompatEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/custom_edit_text"
-        android:hint="Name"/>
+        android:orientation="vertical">
 
-<android.support.v7.widget.AppCompatEditText
-        android:layout_width="match_parent"
- android:layout_height="wrap_content"
-    android:hint="Name"/>
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Payment for july bill"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:text="$300"/>
 
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Payment for july bill"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:text="$300"/>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Payment for july bill"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:text="$300"/>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+    </android.support.v7.widget.LinearLayoutCompat>
 </android.support.v7.widget.LinearLayoutCompat>
