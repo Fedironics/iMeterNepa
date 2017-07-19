@@ -11,7 +11,7 @@ import android.view.ViewGroup;
  * Created by madunaguekenedavid on 19/07/2017.
  */
 
-public class complaintFragment extends Fragment {
+public class ComplaintFragment extends Fragment {
     View myview;
     @Nullable
     @Override

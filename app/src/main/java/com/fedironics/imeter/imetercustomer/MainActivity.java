@@ -100,13 +100,15 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (id == R.id.nav_home) {
-fragmentManager.beginTransaction().replace(R.id.fragment_container,new complaintFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container,new DashboardFragment()).commit();
+
+        } else if (id == R.id.nav_pay) {
+            fragmentManager.beginTransaction().replace(R.id.fragment_container,new PaymentFragment()).commit();
 
         } else if (id == R.id.nav_blog) {
 
         } else if (id == R.id.nav_complain) {
-
-        } else if (id == R.id.nav_pay) {
+            fragmentManager.beginTransaction().replace(R.id.fragment_container,new ComplaintFragment()).commit();
 
         } else if (id == R.id.nav_settings) {
 
