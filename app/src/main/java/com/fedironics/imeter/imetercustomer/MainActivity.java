@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -47,6 +48,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    //open the dashboard fragment
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container,new DashboardFragment()).commit();
+
+
     }
 
     @Override
@@ -106,6 +113,10 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.fragment_container,new PaymentFragment()).commit();
 
         } else if (id == R.id.nav_blog) {
+
+            fragmentManager.beginTransaction().replace(R.id.fragment_container,new BlogFragment()).commit();
+
+
 
         } else if (id == R.id.nav_complain) {
             fragmentManager.beginTransaction().replace(R.id.fragment_container,new ComplaintFragment()).commit();
