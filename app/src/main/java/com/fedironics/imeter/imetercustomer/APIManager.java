@@ -3,6 +3,7 @@ package com.fedironics.imeter.imetercustomer;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +14,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -20,33 +22,48 @@ import java.net.URLEncoder;
 
 /**
  * Created by davidity on 11/05/17.
+ * execution of this class has to be performed in a new thread as it is a network task
  */
 
 public class APIManager {
-    public static final String platform_id = "slkfjdsldjfl";
-    public static final String token = "slkfjosfjos";
-    public boolean isConnected;
+
+    public ConnectivityManager cm;
     public JSONObject result;
-    public String link= "http://inkanimation.com";
     private URL url;
     public int paramCount = 0;
     private URLConnection urlc;
     public String query="";
-    public int responseCode;
     public String responseText;
 
-    public void setLink(String link){
-        this.link = link;
+    public APIManager(ConnectivityManager cm){
+        this.cm = cm;
     }
-    public APIManager(ConnectivityManager cm,String link){
+    public boolean isConnected(){
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        this.isConnected = netInfo.isConnected();
-        if(link!=null) {
-            this.link = link;
+        boolean state= false;
+        if(netInfo!= null) {
+            state = netInfo.isConnected();
         }
-        connect();
+        else {
+            Log.e(iMeterApp.TAG,"tested connection and there is none");
+        }
+        return state;
     }
+
+
+    public void setLink(String link){
+        try {
+            url = new URL(link);
+            Log.d(iMeterApp.TAG,"link has been set to: "+ link);
+        }
+        catch (MalformedURLException e){
+            Log.e(iMeterApp.TAG,"the inputed url is not well formatted");
+            e.printStackTrace();
+        }
+    }
+
     public void addPostValue(String key, String value){
+        Log.d(iMeterApp.TAG, " post value added key :"+ key + "value "+ value);
         try {
             if(paramCount>1){
                 this.query += "&";
@@ -59,51 +76,58 @@ public class APIManager {
             e3.printStackTrace();
         }
     }
-    private void connect(){
-        if(this.isConnected){
+    public void emptyQuery(){
+        this.query = "";
+        paramCount = 0;
+    }
+
+    public void addServerCredentials(){
+        Log.d(iMeterApp.TAG," default api credentials added");
+        emptyQuery();
+        setLink("http://inkanimation.com/imeterapi");
+        addPostValue("platform_id","slkfjdsldjfl");
+        addPostValue("secret","slkfjosfjos");
+    }
+
+    public JSONObject execute(){
+        if(isConnected()) {
             try {
-                this. url = new URL(this.link);
-                this.addPostValue("platform_id",platform_id);
-                this.addPostValue("secret",token);
-            }
-            catch (MalformedURLException e){
+                Log.d(iMeterApp.TAG,"started execution");
+
+                HttpURLConnection urlConnection = (HttpURLConnection)
+                        url.openConnection();
+                if(!query.isEmpty()) {
+                    OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
+                    Log.d(iMeterApp.TAG,"starting to query :"+query);
+                    wr.write(query);
+                    wr.flush();
+                }
+                BufferedReader reader = new
+                        BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+                StringBuilder sb = new StringBuilder();
+                String line = "";
+                while((line = reader.readLine()) != null){
+                    sb.append(line);
+                }
+                responseText = sb.toString();
+                Log.e(iMeterApp.TAG,responseText);
+                result = new JSONObject(responseText);
+            } catch (IOException e4) {
+                e4.printStackTrace();
+            } catch (JSONException e) {
+                Log.e(iMeterApp.TAG,"trying to convert unformatted json string ");
                 e.printStackTrace();
             }
-            catch (IOException e1){
-                e1.printStackTrace();
-            }
 
+            return result;
         }
-    }
-    public JSONObject execute(){
-        try {
-            this.urlc = url.openConnection();
-            this.urlc.setConnectTimeout(5000);
-            this.urlc.setDoOutput(true);
-            OutputStreamWriter wr = new OutputStreamWriter(this.urlc.getOutputStream());
-            wr.write( this.query );
-            wr.flush();
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(this.urlc.getInputStream())
-            );
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-            // Read Server Response
-            while((line = reader.readLine()) != null) {
-                sb.append(line);
-                break;
-            }
-            responseText = sb.toString();
-            JSONObject result = new JSONObject(responseText);
-            this.result = result;
-            paramCount = 0;
+        else {
+            //if the internet is not connected
+            Log.e(iMeterApp.TAG,"internet is not connected");
+            JSONObject emptyResult = new JSONObject();
+            return  emptyResult;
         }
-        catch (IOException e4){
-            e4.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return result;
     }
 
 
