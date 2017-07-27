@@ -19,17 +19,22 @@
     <string name="sign_up_text">Don\'t have an account?</string>
     <string name="title_activity_main">EEDC Utility App</string>
     <string name="userid_tag">userid</string>
+    <string name="logout">Logout</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>
-
+    <string name="default_nepa_account_no">0349051136-01</string>
+    <string name="pending_payments">Pending Payments</string>
+    <string name="notifications">Notifications</string>
+    <string name="make_payment">Make Payment</string>
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
-
+    <string name="def_email">myemail@domain.com</string>
+    <string name="def_phone">08012345678</string>
     <string name="pref_title_social_recommendations">Enable social recommendations</string>
     <string name="pref_description_social_recommendations">Recommendations for people to contact
         based on your message history

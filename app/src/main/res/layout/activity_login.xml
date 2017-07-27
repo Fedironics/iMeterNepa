@@ -81,15 +81,11 @@
 
         <Button
             android:id="@+id/email_sign_in_button"
-            style="@style/button_custom"
+            style="@style/round_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:alpha=".7"
-            android:background="@drawable/curvedbutton"
             android:text="@string/action_sign_in"
-            android:textColor="@color/colorAccent"
-            android:textStyle="bold" />
+            />
 
         <LinearLayout
             android:layout_width="match_parent"

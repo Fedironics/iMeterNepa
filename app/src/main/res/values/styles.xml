@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -15,21 +17,48 @@
     <style name="custom_edit_text" parent="AppTheme.NoActionBar">
         <item name="android:editTextStyle">@style/EditTextStyle</item>
     </style>
-<style name="button_custom">
+    <style name="round_button">
+        <item name="android:background">@drawable/curvedbutton</item>
+        <item name="android:alpha">.7</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textStyle">bold</item>
 
-</style>
+    </style>
 
     <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
         <item name="colorControlNormal">@color/plainWhite</item>
         <item name="colorControlActivated">@color/plainWhite</item>
         <item name="colorControlHighlight">@color/plainWhite</item>
+        <item name="android:layout_marginTop">16dp</item>
     </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="InputTextActivity">
+        <item name="android:textColor">#ffffff</item>
+    </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="AppThemeNoBar" parent="Theme.AppCompat.Light.DarkActionBar">
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+    <style name="transparent_edit">
+        <item name="android:background">@drawable/edittextview</item>
+        <item name="android:textColor">@color/plainWhite</item>
+        <item name="android:textColorHint">@color/thickTransparentWhite</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">25dp</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="square_transparent_button">
+        <item name="android:background">@drawable/transparentbutton</item>
+
     </style>
 </resources>

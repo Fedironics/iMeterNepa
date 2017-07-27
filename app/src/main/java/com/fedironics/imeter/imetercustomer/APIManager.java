@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.StringReader;
@@ -19,6 +20,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  * Created by davidity on 11/05/17.
@@ -34,6 +39,7 @@ public class APIManager {
     private URLConnection urlc;
     public String query="";
     public String responseText;
+    public int responseCode;
 
     public APIManager(ConnectivityManager cm){
         this.cm = cm;
@@ -61,6 +67,12 @@ public class APIManager {
             e.printStackTrace();
         }
     }
+    public void addDefaultPostValues(){
+        //TODO : replace with the gotten preference meter no
+        addPostValue("meter_no","003998377477-1");
+        addPostValue("email","ekenemadunagu@gmail.com");
+
+    }
 
     public void addPostValue(String key, String value){
         Log.d(iMeterApp.TAG, " post value added key :"+ key + "value "+ value);
@@ -81,27 +93,38 @@ public class APIManager {
         paramCount = 0;
     }
 
-    public void addServerCredentials(){
+    public void addServerCredentials(String request){
         Log.d(iMeterApp.TAG," default api credentials added");
         emptyQuery();
-        setLink("http://inkanimation.com/imeterapi");
-        addPostValue("platform_id","slkfjdsldjfl");
-        addPostValue("secret","slkfjosfjos");
+        setLink("http://inkanimation.com/imeterApi/index.php?request="+request);
+        addPostValue("platform_id","3xvlvq9vhmyivy7k51ng");
+        addPostValue("secret","kdf8z20axid1rusnyf2o");
     }
 
-    public JSONObject execute(){
+    public JSONObject execute(String method){
         if(isConnected()) {
             try {
+                if(method.isEmpty()){
+                    method = "POST";
+                }
                 Log.d(iMeterApp.TAG,"started execution");
+               TLSSocketFactory sslSocketFactory = new TLSSocketFactory();
+                HttpsURLConnection.setDefaultSSLSocketFactory(sslSocketFactory);
 
-                HttpURLConnection urlConnection = (HttpURLConnection)
-                        url.openConnection();
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod(method);
+
                 if(!query.isEmpty()) {
                     OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
                     Log.d(iMeterApp.TAG,"starting to query :"+query);
                     wr.write(query);
                     wr.flush();
                 }
+
+                             urlConnection.connect();
+             responseCode = urlConnection.getResponseCode();
+
+
                 BufferedReader reader = new
                         BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
@@ -119,12 +142,21 @@ public class APIManager {
                 Log.e(iMeterApp.TAG,"trying to convert unformatted json string ");
                 e.printStackTrace();
             }
+            catch (KeyManagementException ignored) {
+                Log.e(iMeterApp.TAG,"keymanagement exception occured");
 
+            } catch (NoSuchAlgorithmException e) {
+
+                Log.e(iMeterApp.TAG,"no such algorithm exception occured");
+                e.printStackTrace();
+            }
+            emptyQuery();
             return result;
         }
         else {
             //if the internet is not connected
             Log.e(iMeterApp.TAG,"internet is not connected");
+            emptyQuery();
             JSONObject emptyResult = new JSONObject();
             return  emptyResult;
         }

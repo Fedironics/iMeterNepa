@@ -3,7 +3,10 @@ package com.fedironics.imeter.imetercustomer;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +32,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,26 +49,34 @@ public class RegisterActivity extends AppCompatActivity  {
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
+    public String mssg = "Unable To Register" ;
 
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
+    private UserRegisterTask mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    private EditText mNameView;
+    private EditText mPhoneView;
     private View mProgressView;
     private View mLoginFormView;
+    public String email;
+    public String password;
+    public String phone;
+    public String user_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        setupActionBar();
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mNameView = (EditText) findViewById(R.id.name);
+        mPhoneView = (EditText) findViewById(R.id.phone);
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -89,16 +103,7 @@ public class RegisterActivity extends AppCompatActivity  {
     }
 
 
-    /**
-     * Set up the {@link android.app.ActionBar}, if the API is available.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void setupActionBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            // Show the Up button in the action bar.
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-    }
+
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -115,8 +120,10 @@ public class RegisterActivity extends AppCompatActivity  {
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+       email = mEmailView.getText().toString();
+       password = mPasswordView.getText().toString();
+        phone = mPhoneView.getText().toString();
+         user_name = mNameView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -147,7 +154,7 @@ public class RegisterActivity extends AppCompatActivity  {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
+            mAuthTask = new UserRegisterTask(email, password,user_name,phone,this);
             mAuthTask.execute((Void) null);
         }
     }
@@ -205,29 +212,59 @@ public class RegisterActivity extends AppCompatActivity  {
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
         private final String mPassword;
+        private final String mPhone;
+        private final String mName;
+        private Context context;
 
-        UserLoginTask(String email, String password) {
+        UserRegisterTask(String email, String password,String name, String phone, Context context) {
             mEmail = email;
             mPassword = password;
+            mPhone = phone;
+            mName = name;
+
+            this.context = context;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-
+            iMeterApp myApp = (iMeterApp)getApplicationContext();
+            APIManager imeterApi =myApp.imeterapi;
+            imeterApi.addServerCredentials("users");
+            imeterApi.addPostValue("method","create");
+            imeterApi.addPostValue("email",mEmail);
+            imeterApi.addPostValue("password",mPassword);
+            imeterApi.addPostValue("phone",mPhone);
+            imeterApi.addPostValue("name",mName);
+            JSONObject recievedObject = imeterApi.execute("POST");
             try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
+                if(recievedObject==null){
+                    mssg = "server response empty";
+                    return false;
+                }
+                else if(recievedObject.has("error")){
+                    mssg = recievedObject.getString("error");
+                    return false;
+                }
+                else {
+                    if(myApp.saveUser(recievedObject)){
+                        mssg = "Succesful Login";
+                        return true;
+                    };
+                }
+                return true;
+
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
             }
 
-            // TODO: register the new account here.
-            return true;
+            mssg= "Unable to recieve data";
+            return false;
         }
 
         @Override

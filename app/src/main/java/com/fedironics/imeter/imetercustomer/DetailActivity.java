@@ -22,6 +22,9 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,7 +34,9 @@ import android.widget.TextView;
 public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "position";
-
+    EditText comment_form;
+    int postion;
+    ImageButton mybutton;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +49,7 @@ public class DetailActivity extends AppCompatActivity {
         // Set title of Detail page
         // collapsingToolbar.setTitle(getString(R.string.item_title));
 
-        int postion = getIntent().getIntExtra(EXTRA_POSITION, 0);
+        postion = getIntent().getIntExtra(EXTRA_POSITION, 0);
         Resources resources = getResources();
         String[] places = resources.getStringArray(R.array.places);
         collapsingToolbar.setTitle(places[postion % places.length]);
@@ -60,7 +65,33 @@ public class DetailActivity extends AppCompatActivity {
         TypedArray placePictures = resources.obtainTypedArray(R.array.places_picture);
         ImageView placePicutre = (ImageView) findViewById(R.id.image);
         placePicutre.setImageDrawable(placePictures.getDrawable(postion % placePictures.length()));
+         comment_form = (EditText)findViewById(R.id.comment_text);
+         mybutton = (ImageButton)findViewById(R.id.comment);
+        mybutton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        sendComment();
+                    }
+                }
+        );
+
 
         placePictures.recycle();
+    }
+
+    public void sendComment(){
+        String comment = comment_form.getText().toString();
+        final iMeterApp myApp = (iMeterApp)getApplicationContext();
+        myApp.newPostRequest("comment");
+        myApp.addPostParam("method","create");
+        myApp.addPostParam("item_id",String.valueOf(postion));
+        myApp.addPostParam("comment",comment);
+        new Thread(){
+            public void run(){
+                myApp.imeterapi.execute("POST");
+            }
+        }.start();
+
     }
 }

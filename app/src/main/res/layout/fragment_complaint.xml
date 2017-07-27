@@ -1,203 +1,218 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    android:padding="0dp"
+    android:background="@drawable/mygradient"
+    >
     <LinearLayout
-        android:id="@+id/bluegradient"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/mygradient"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:textColor="#ffffff">
+        android:padding="30dp"
+        android:background="@color/thickTransparentWhite">
+
 
         <TextView
-            android:id="@+id/balance_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="40dp"
-            android:paddingTop="20dp"
-            android:text="Your Balance"
+            android:text="Make a complaint?"
+            android:textColor="@color/plainWhite"
             android:textAllCaps="true"
-            android:textColor="#c8ffffff"
-            android:textSize="17sp" />
+            android:gravity="center"
+            android:textSize="28sp"
+            android:layout_marginBottom="50dp"/>
 
-        <LinearLayout
-            android:id="@+id/balance_value_container"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/balance_value"
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_weight="1"
-                android:paddingLeft="30dp"
-                android:paddingTop="10dp"
-                android:text="$20, 468"
-                android:textColor="#ffffff"
-                android:textSize="55sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_gravity="top"
-
-                android:layout_weight="2"
-                android:background="@drawable/curvedbackground"
-                android:foregroundGravity="top"
-                android:gravity="top|center_horizontal"
-                android:padding="5dp"
-                android:text="468"
-                android:textColor="#ffffff">
-
-
-            </TextView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Power Useage"
-                    android:textColor="#b6ffffff"
-                    android:textSize="17sp"
-                    android:textAllCaps="true" />
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:text="436Kw"
-                    android:textColor="#ffffff"
-                    android:textSize="17sp" />
-            </LinearLayout>
-
-            <android.support.v7.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="expense"
-                    android:textColor="#b6ffffff"
-                    android:textSize="17sp"
-                    android:textAllCaps="true" />
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:text="436Kw"
-                    android:textColor="#ffffff"
-                    android:textSize="17sp" />
-            </android.support.v7.widget.LinearLayoutCompat>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/spinnerholder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:text="Complaint Title"
+            android:textAllCaps="true"
+            android:textSize="13sp"
+            android:textColor="@color/plainWhite"/>
 
         <Spinner
-            android:id="@+id/date_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:id="@+id/complaint_titles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/complaint_titles"
+            style="@style/transparent_edit"
+            >
 
         </Spinner>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Severity"
+            android:textAllCaps="true"
+            android:textSize="13sp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/plainWhite"/>
+
+
+        <SeekBar
+            android:id="@+id/severity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:progress="1" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Low"
+                android:textSize="10sp"
+                android:textColor="@color/plainWhite"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Medium"
+                android:textSize="10sp"
+                android:gravity="center"
+                android:textColor="@color/plainWhite"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:layout_weight="1"
+                android:text="High"
+                android:gravity="right"
+                android:textColor="@color/plainWhite"/>
+        </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:gravity="right"
-            android:text="total useage" />
+            android:text="State"
+            android:textSize="13sp"
+            android:textAllCaps="true"
+            android:textColor="@color/plainWhite"/>
+        <Spinner
+            android:id="@+id/state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/states"
+            style="@style/transparent_edit"
+            />
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="District"
+        android:textSize="13sp"
+        android:textAllCaps="true"
+        android:textColor="@color/plainWhite"/>
+        <Spinner
+            android:id="@+id/district"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/default_district"
+            style="@style/transparent_edit"
+            >
+
+        </Spinner>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:textAllCaps="true"
+            android:textSize="13sp"
+            android:textColor="@color/plainWhite"/>
+        <EditText
+            android:id="@+id/addressdesc"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:inputType="text"
+            android:hint="Town, Street, House."
+            style="@style/transparent_edit"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textAllCaps="true"
+            android:text="Time Of Occurence"
+            android:textColor="@color/plainWhite"/>
+        <EditText
+            android:id="@+id/occurence_time"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:inputType="datetime"
+            android:hint="MM:DD HH:MM"
+            style="@style/transparent_edit"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textAllCaps="true"
+            android:textSize="13sp"
+            android:textColor="@color/plainWhite"/>
+
+        <EditText
+            android:id="@+id/decription"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:inputType="textMultiLine"
+            android:minLines="4"
+            android:lines="7"
+            android:hint="A short description of the problem ranging for about five lines"
+            style="@style/transparent_edit"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Duration"
+            android:textAllCaps="true"
+            android:textSize="13sp"
+            android:textColor="@color/plainWhite"/>
+        <Spinner
+            android:id="@+id/duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/occurrence_duration"
+            style="@style/transparent_edit"
+            >
+
+        </Spinner>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Frequency Of Occurence"
+            android:textAllCaps="true"
+            android:textSize="13sp"
+            android:textColor="@color/plainWhite"/>
+        <Spinner
+            android:id="@+id/frequency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/occurrence_frequency"
+            style="@style/transparent_edit"
+            >
+
+        </Spinner>
+        <Button
+            android:id="@+id/submit_complaint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:clickable="true"
+            style="@style/round_button" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="3dp" />
+        <Button
+            android:id="@+id/submit_complaint_button_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:clickable="true"
+            style="@style/square_transparent_button"
+            />
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/graph"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:src="@drawable/flurry_julypulse_androidnewprojectstarts" />
-
-    <LinearLayout
-        android:id="@+id/history_holder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/singlehistory1"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Payment for july bill" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:text="$300" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/singlehistory2"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Payment for july bill" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:text="$300" />
-
-        </LinearLayout>
-
-   </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

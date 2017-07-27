@@ -118,10 +118,10 @@ public class LoginActivity extends AppCompatActivity  {
     }
 
 
-public void gotoRegister(View view){
-    Intent intent = new Intent(this,RegisterActivity.class);
-    startActivity(intent);
-}
+    public void gotoRegister(View view){
+        Intent intent = new Intent(this,RegisterActivity.class);
+        startActivity(intent);
+    }
 
 
 
@@ -220,7 +220,7 @@ public void gotoRegister(View view){
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-       //     mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            //     mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 
@@ -245,36 +245,29 @@ public void gotoRegister(View view){
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            ConnectivityManager con =(ConnectivityManager)  getSystemService(Context.CONNECTIVITY_SERVICE);
-            APIManager imeterApi = new APIManager(con,null);
-            imeterApi.addPostValue("method","authenticate");
-            imeterApi.addPostValue("username",mEmail);
-            imeterApi.addPostValue("password",mPassword);
-            JSONObject recievedObject = imeterApi.execute();
+            iMeterApp myApp = (iMeterApp)getApplicationContext();
+            myApp.imeterapi.addServerCredentials("users");
+            myApp.imeterapi.addPostValue("method","authenticate");
+            myApp.imeterapi.addPostValue("username",mEmail);
+            myApp.imeterapi.addPostValue("password",mPassword);
+            JSONObject recievedObject = myApp.imeterapi.execute("POST");
             try {
                 if(recievedObject==null){
                     mssg = "server response empty";
                     return false;
                 }
-                            if(recievedObject.has("error")){
-                                mssg = recievedObject.getString("error");
-                                return false;
-                            }
-                            SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
-                            SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putString("lastname", recievedObject.getString("firstname"));
-                            editor.putString("lastname", recievedObject.getString("lastname"));
-                            editor.putInt(getResources().getString(R.string.userid_tag), recievedObject.getInt("id"));
-                            editor.putString("phone", recievedObject.getString("phone"));
-                            mssg = "Succesful Login";
-
-                            editor.apply();
-                            return true;
-
-                        }
-                        catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                else if(recievedObject.has("error")){
+                    mssg = recievedObject.getString("error");
+                    return false;
+                }
+                else {
+                    myApp.saveUser(recievedObject);
+                    return true;
+                }
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
+            }
 
             mssg= "Unable to recieve data";
             return false;

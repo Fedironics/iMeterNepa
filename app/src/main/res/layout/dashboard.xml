@@ -36,7 +36,7 @@
                 android:layout_weight="1"
                 android:paddingLeft="30dp"
                 android:paddingTop="10dp"
-                android:text="$20, 468"
+                android:text="N20,468"
                 android:textColor="#ffffff"
                 android:textSize="55sp" />
 
