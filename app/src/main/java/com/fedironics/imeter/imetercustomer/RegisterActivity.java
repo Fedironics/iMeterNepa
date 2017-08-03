@@ -4,9 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +25,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,11 +34,14 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,20 +69,26 @@ public class RegisterActivity extends AppCompatActivity  {
     private EditText mPasswordView;
     private EditText mNameView;
     private EditText mPhoneView;
+    private ImageButton pickImage;
     private View mProgressView;
     private View mLoginFormView;
     public String email;
     public String password;
     public String phone;
     public String user_name;
+    private final int SELECT_FILE1= 9868;
+    private final int SELECT_FILE2= 9068;
+    public String selectedPath1;
+    public String selectedPath2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         // Set up the login form.
+        pickImage = (ImageButton)findViewById(R.id.profile_pix) ;
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        mNameView = (EditText) findViewById(R.id.name);
+        mNameView = (EditText) findViewById(R.id.name_reg);
         mPhoneView = (EditText) findViewById(R.id.phone);
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -97,11 +110,67 @@ public class RegisterActivity extends AppCompatActivity  {
                 attemptLogin();
             }
         });
+        pickImage.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openGallery(SELECT_FILE1);
+            }
+        });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
 
+    public void openGallery(int req_code) {
+
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,
+                "Select file to upload "), req_code);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (resultCode == RESULT_OK) {
+            Uri selectedImageUri = data.getData();
+
+            if (requestCode == SELECT_FILE1) {
+                selectedPath1 = getPath(selectedImageUri);
+                System.out.println("selectedPath1 : " + selectedPath1);
+            }
+
+            if (requestCode == SELECT_FILE2) {
+                selectedPath2 = getPath(selectedImageUri);
+                System.out.println("selectedPath2 : " + selectedPath2);
+            }
+
+            Log.d(iMeterApp.TAG,"Selected File paths : " + selectedPath1 + "," + selectedPath2);
+        }
+
+        if(selectedPath1!=null) {
+            try {
+                pickImage.setImageDrawable(grabImageFromUrl(selectedPath1));
+
+            } catch(Exception e) {
+            }
+        }
+
+    }
+
+    private Drawable grabImageFromUrl(String url) throws Exception {
+        return Drawable.createFromStream((InputStream)new URL(url).getContent(), "src");
+    }
+
+    public String getPath(Uri uri) {
+
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+
+        return cursor.getString(column_index);
+    }
 
 
 
@@ -201,7 +270,6 @@ public class RegisterActivity extends AppCompatActivity  {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 
@@ -273,6 +341,8 @@ public class RegisterActivity extends AppCompatActivity  {
             showProgress(false);
 
             if (success) {
+                Intent toMain = new Intent(this.context,MainActivity.class);
+                startActivity(toMain);
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

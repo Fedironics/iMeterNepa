@@ -12,6 +12,14 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
+
 /**
  * Created by madunaguekenedavid on 19/07/2017.
  */
@@ -19,6 +27,10 @@ import android.widget.Spinner;
 public class ComplaintFragment extends Fragment {
     View myview;
     Button submit;
+    Spinner titles, districts, durations, frequencies;
+    EditText occurenceTime, Description,addressE;
+    SeekBar Severity;
+    BarChart chart;
     public iMeterApp myApp;
     @Nullable
     @Override
@@ -32,36 +44,44 @@ public class ComplaintFragment extends Fragment {
             }
         });
         myApp = (iMeterApp)getActivity().getApplicationContext();
+        titles = (Spinner)myview.findViewById(R.id.complaint_titles);
+        districts = (Spinner)myview.findViewById(R.id.district);
+        durations = (Spinner)myview.findViewById(R.id.duration);
+        frequencies = (Spinner)myview.findViewById(R.id.frequency);
+        addressE = (EditText)myview.findViewById(R.id.addressdesc);
+        occurenceTime = (EditText)myview.findViewById(R.id.occurence_time);
+        Severity = (SeekBar)myview.findViewById(R.id.severity);
+        Description = (EditText)myview.findViewById(R.id.decription);
+        setDefaults();
         return myview;
     }
+    public void setDefaults(){
+            addressE.setText(myApp.getStringInfo("address1"));
+
+    }
+
+
+
     public void complain(){
-        Spinner titles = (Spinner)myview.findViewById(R.id.complaint_titles);
         String title = titles.getSelectedItem().toString();
-        Spinner districts = (Spinner)myview.findViewById(R.id.district);
         String district = districts.getSelectedItem().toString();
-        Spinner durations = (Spinner)myview.findViewById(R.id.duration);
         String duration = durations.getSelectedItem().toString();
-        Spinner frequencies = (Spinner)myview.findViewById(R.id.frequency);
         String frequency = frequencies.getSelectedItem().toString();
-        EditText addressE = (EditText)myview.findViewById(R.id.addressdesc);
         String address = addressE.getText().toString();
-        EditText occurenceTime = (EditText)myview.findViewById(R.id.occurence_time);
         String occurence_time = occurenceTime.getText().toString();
-        EditText Description = (EditText)myview.findViewById(R.id.decription);
         String description = Description.getText().toString();
-        SeekBar Severity = (SeekBar)myview.findViewById(R.id.severity);
         int severity = Severity.getProgress();
         myApp.imeterapi.addServerCredentials("complaint");
-        myApp.imeterapi.addDefaultPostValues();
-        myApp.imeterapi.addPostValue("title",title);
-        myApp.imeterapi.addPostValue("district",district);
-        myApp.imeterapi.addPostValue("duration",duration);
-        myApp.imeterapi.addPostValue("frequency",frequency);
-        myApp.imeterapi.addPostValue("address",address);
-        myApp.imeterapi.addPostValue("occurence_time",occurence_time);
-        myApp.imeterapi.addPostValue("decription",description);
-        myApp.imeterapi.addPostValue("severity",String.valueOf(severity));
-        myApp.imeterapi.addPostValue("method","create");
+        myApp.addDefaultParams();
+        myApp.addPostParam("title",title);
+        myApp.addPostParam("district",district);
+        myApp.addPostParam("duration",duration);
+        myApp.addPostParam("frequency",frequency);
+        myApp.addPostParam("address",address);
+        myApp.addPostParam("occurence_time",occurence_time);
+        myApp.addPostParam("decription",description);
+        myApp.addPostParam("severity",String.valueOf(severity));
+        myApp.addPostParam("method","create");
         new Thread(){
             @Override
             public void run() {

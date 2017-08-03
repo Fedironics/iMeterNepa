@@ -77,7 +77,7 @@ public class APIManager {
     public void addPostValue(String key, String value){
         Log.d(iMeterApp.TAG, " post value added key :"+ key + "value "+ value);
         try {
-            if(paramCount>1){
+            if(paramCount>0){
                 this.query += "&";
             }
             this.query+= URLEncoder.encode(key,"UTF-8")
@@ -96,9 +96,8 @@ public class APIManager {
     public void addServerCredentials(String request){
         Log.d(iMeterApp.TAG," default api credentials added");
         emptyQuery();
-        setLink("http://inkanimation.com/imeterApi/index.php?request="+request);
-        addPostValue("platform_id","3xvlvq9vhmyivy7k51ng");
-        addPostValue("secret","kdf8z20axid1rusnyf2o");
+        setLink("http://inkanimation.com/imeterApi/"+request);
+
     }
 
     public JSONObject execute(String method){
@@ -108,23 +107,22 @@ public class APIManager {
                     method = "POST";
                 }
                 Log.d(iMeterApp.TAG,"started execution");
-               TLSSocketFactory sslSocketFactory = new TLSSocketFactory();
+                TLSSocketFactory sslSocketFactory = new TLSSocketFactory();
                 HttpsURLConnection.setDefaultSSLSocketFactory(sslSocketFactory);
 
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod(method);
-
+                urlConnection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+                urlConnection.setRequestProperty("platform_id","3xvlvq9vhmyivy7k51ng");
+                urlConnection.setRequestProperty("secret","kdf8z20axid1rusnyf2o");
                 if(!query.isEmpty()) {
                     OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
                     Log.d(iMeterApp.TAG,"starting to query :"+query);
                     wr.write(query);
                     wr.flush();
                 }
-
-                             urlConnection.connect();
-             responseCode = urlConnection.getResponseCode();
-
-
+                urlConnection.connect();
+                responseCode = urlConnection.getResponseCode();
                 BufferedReader reader = new
                         BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 

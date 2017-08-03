@@ -1,26 +1,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/bluegradient"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/mygradient"
+        android:layout_height="170dp"
+        android:background="@drawable/mywebgradienttrans"
         android:orientation="vertical"
+        android:padding="20dp"
         android:textColor="#ffffff">
 
         <TextView
             android:id="@+id/balance_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="40dp"
+            android:layout_marginTop="0dp"
             android:paddingTop="20dp"
             android:text="Your Balance"
             android:textAllCaps="true"
-            android:textColor="#c8ffffff"
+            android:textColor="@color/thickTransparentWhite"
             android:textSize="17sp" />
 
         <LinearLayout
@@ -34,11 +37,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:paddingLeft="30dp"
                 android:paddingTop="10dp"
                 android:text="N20,468"
                 android:textColor="#ffffff"
-                android:textSize="55sp" />
+                android:textSize="50sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -71,133 +73,341 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <android.support.v7.widget.AppCompatTextView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="Power Useage"
-                    android:textColor="#b6ffffff"
-                    android:textSize="17sp"
-                    android:textAllCaps="true" />
+                    android:textAllCaps="true"
+                    android:textColor="@color/thickTransparentWhite"
+                    android:textSize="16sp" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:text="436Kw"
-                    android:textColor="#ffffff"
-                    android:textSize="17sp" />
+                    android:textColor="@color/plainWhite"
+                    android:textSize="16sp" />
             </LinearLayout>
 
-            <android.support.v7.widget.LinearLayoutCompat
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <android.support.v7.widget.AppCompatTextView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="expense"
-                    android:textColor="#b6ffffff"
-                    android:textSize="17sp"
-                    android:textAllCaps="true" />
+                    android:textAllCaps="true"
+                    android:textColor="@color/thickTransparentWhite"
+                    android:textSize="16sp" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:text="436Kw"
-                    android:textColor="#ffffff"
-                    android:textSize="17sp" />
-            </android.support.v7.widget.LinearLayoutCompat>
+                    android:textColor="@color/plainWhite"
+                    android:textSize="16sp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/spinnerholder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="30dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="1dp">
 
         <Spinner
+            android:layout_weight="2"
+            android:layout_marginLeft="20dp"
             android:id="@+id/date_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:textColor="@color/colorAccent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/default_time_frame">
 
         </Spinner>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:gravity="right"
-            android:text="total useage" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:drawableLeft="@android:drawable/arrow_down_float"
+            android:gravity="center_vertical"
+            android:text=" billing"
+            android:textAllCaps="true"
+            android:textSize="13sp" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:drawableLeft="@android:drawable/arrow_up_float"
+            android:gravity="center_vertical"
+            android:text=" useage"
+            android:textAllCaps="true"
+            android:textSize="13sp" />
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/graph"
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/bar_chart"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:src="@drawable/flurry_julypulse_androidnewprojectstarts" />
-
+        android:layout_height="170dp" />
     <LinearLayout
-        android:id="@+id/history_holder"
+        android:orientation="vertical"
+        android:id="@+id/afterGraph"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/singlehistory1"
+
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:text="Payment History:"
+            style="@style/default_title"
+            />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Payment for july bill" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:text="$300" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/singlehistory2"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.AppCompatImageView
+            android:layout_height="160dp"
+            >
+            <LinearLayout
+                android:id="@+id/history_holder"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Payment for july bill" />
+                <LinearLayout
+                    android:id="@+id/singlehistory1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
 
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:text="$300" />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        app:srcCompat="@drawable/ic_payment_black_24px"
+                        />
 
-        </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        android:text="Payment for july bill" />
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="N34,0000" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        app:srcCompat="@drawable/ic_payment_black_24px"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        android:text="Payment for july bill" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="N34,0000" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        app:srcCompat="@drawable/ic_payment_black_24px"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        android:text="Payment for july bill" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="N34,0000" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        app:srcCompat="@drawable/ic_payment_black_24px"
+                        android:padding="5dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical"
+                        android:textAllCaps="true"
+                        android:paddingLeft="20dp"
+                        android:text="Payment for july bill" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="N34,0000" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        app:srcCompat="@drawable/ic_payment_black_24px"
+                        android:padding="5dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical"
+                        android:textAllCaps="true"
+                        android:paddingLeft="20dp"
+                        android:text="Payment for july bill" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="N34,0000" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        app:srcCompat="@drawable/ic_payment_black_24px"
+                        android:padding="5dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical"
+                        android:textAllCaps="true"
+                        android:paddingLeft="20dp"
+                        android:text="Payment for july bill" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="N34,0000" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        app:srcCompat="@drawable/ic_payment_black_24px"
+                        android:padding="5dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical"
+                        android:textAllCaps="true"
+                        android:paddingLeft="20dp"
+                        android:text="Payment for july bill" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="N34,0000" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
-
 </LinearLayout>

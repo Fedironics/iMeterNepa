@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragment_container,new DashboardFragment()).commit();
+
+
     }
 
     @Override
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_blog) {
 
-            fragmentManager.beginTransaction().replace(R.id.fragment_container,new BlogFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container,new CardContentFragment()).commit();
 
         } else if (id == R.id.nav_complain) {
             fragmentManager.beginTransaction().replace(R.id.fragment_container,new ComplaintFragment()).commit();
@@ -138,7 +140,11 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
     public void logout(){
+        iMeterApp myApp = (iMeterApp)getApplicationContext();
+        myApp.displayNotification();
         //TODO : logout and remove preference files
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);

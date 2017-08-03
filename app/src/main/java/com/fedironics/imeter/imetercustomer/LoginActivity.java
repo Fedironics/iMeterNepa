@@ -248,7 +248,7 @@ public class LoginActivity extends AppCompatActivity  {
             iMeterApp myApp = (iMeterApp)getApplicationContext();
             myApp.imeterapi.addServerCredentials("users");
             myApp.imeterapi.addPostValue("method","authenticate");
-            myApp.imeterapi.addPostValue("username",mEmail);
+            myApp.imeterapi.addPostValue("email",mEmail);
             myApp.imeterapi.addPostValue("password",mPassword);
             JSONObject recievedObject = myApp.imeterapi.execute("POST");
             try {
@@ -261,8 +261,8 @@ public class LoginActivity extends AppCompatActivity  {
                     return false;
                 }
                 else {
-                    myApp.saveUser(recievedObject);
-                    return true;
+                    return  myApp.saveUser(recievedObject);
+
                 }
             }
             catch (JSONException e) {

@@ -35,8 +35,8 @@ public class BlogFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getActivity().getSupportFragmentManager());
-      adapter.addFragment(new ListContentFragment(), "List");
-      adapter.addFragment(new TileContentFragment(), "Tile");
+        adapter.addFragment(new ListContentFragment(), "List");
+        adapter.addFragment(new TileContentFragment(), "Tile");
         adapter.addFragment(new CardContentFragment(), "Card");
         viewPager.setAdapter(adapter);
     }

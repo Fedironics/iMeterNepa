@@ -22,6 +22,13 @@
         <item name="android:alpha">.7</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textStyle">bold</item>
+    </style>
+    <style name="default_title" >
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
 
     </style>
 
@@ -49,9 +56,9 @@
         <item name="android:background">@drawable/edittextview</item>
         <item name="android:textColor">@color/plainWhite</item>
         <item name="android:textColorHint">@color/thickTransparentWhite</item>
-        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingLeft">15dp</item>
         <item name="android:paddingRight">10dp</item>
-        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingTop">14dp</item>
         <item name="android:paddingBottom">10dp</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">25dp</item>
@@ -59,6 +66,7 @@
     </style>
     <style name="square_transparent_button">
         <item name="android:background">@drawable/transparentbutton</item>
+        <item name="android:textColor">@color/thickTransparentWhite</item>
 
     </style>
 </resources>

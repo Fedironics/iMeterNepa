@@ -1,14 +1,14 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/bluegradient"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@drawable/mygradient"
+        android:background="@drawable/mywebgradienttrans"
         android:orientation="vertical"
         android:textColor="#ffffff">
 
@@ -19,8 +19,9 @@
             android:paddingLeft="40dp"
             android:paddingTop="20dp"
             android:text="Make payment"
+            android:layout_marginTop="20dp"
             android:textAllCaps="true"
-            android:textColor="#c8ffffff"
+            android:textColor="@color/thickTransparentWhite"
             android:textSize="17sp" />
 
         <LinearLayout
@@ -29,135 +30,62 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="75dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:layout_marginLeft="20dp"
                 android:text="N"
-                android:textColor="#ffffff"
+                android:gravity="center_vertical"
+                android:textColor="@color/thickTransparentWhite"
                 android:textSize="55sp"
                 />
             <EditText
                 android:id="@+id/balance_value"
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingTop="10dp"
-                android:text="20, 468"
+                android:layout_marginRight="20dp"
+                android:text="120,468"
+                style="@style/transparent_edit"
                 android:inputType="numberDecimal"
-                android:textColor="#ffffff"
+                android:textColor="@color/plainWhite"
                 android:textSize="55sp" />
 
 
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
-
-            <Button
-                android:id="@+id/email_sign_in_button"
-                style="@style/round_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:alpha=".7"
-                android:background="@drawable/curvedbutton"
-                android:text="@string/make_payment"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold" />
-
-
-
-        </LinearLayout>
     </LinearLayout>
-
     <LinearLayout
-        android:id="@+id/spinnerholder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Spinner
-            android:id="@+id/date_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </Spinner>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:gravity="right"
-            android:text="total useage" />
-
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/graph"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:src="@drawable/flurry_julypulse_androidnewprojectstarts" />
-
-    <LinearLayout
-        android:id="@+id/history_holder"
+        android:id="@+id/lower_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_below="@id/bluegradient"
         android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/singlehistory1"
+        <TextView
+            android:id="@+id/customer_detail_title"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:text="Customer Details"/>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Payment for july bill" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:text="$300" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/singlehistory2"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Payment for july bill" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:text="$300" />
-
-        </LinearLayout>
-
+            android:layout_height="wrap_content"
+            android:text="Customer Name"/>
     </LinearLayout>
 
-</LinearLayout>
+    <ImageButton
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:srcCompat="@drawable/ic_payment_black_24px"
+        android:id="@+id/pay_bills"
+        android:elevation="1dp"
+        android:background="@drawable/rounded_button"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/bluegradient"
+        android:layout_marginBottom="-32dp"
+        android:layout_marginRight="20dp"/>
+
+</RelativeLayout>
