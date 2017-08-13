@@ -303,11 +303,16 @@ public class RegisterActivity extends AppCompatActivity  {
             iMeterApp myApp = (iMeterApp)getApplicationContext();
             APIManager imeterApi =myApp.imeterapi;
             imeterApi.addServerCredentials("users");
-            imeterApi.addPostValue("method","create");
-            imeterApi.addPostValue("email",mEmail);
-            imeterApi.addPostValue("password",mPassword);
-            imeterApi.addPostValue("phone",mPhone);
-            imeterApi.addPostValue("name",mName);
+            JSONObject myobject = new JSONObject();
+            try {
+                myobject.put("email", mEmail);
+                myobject.put("password", mPassword);
+                myobject.put("phone", mPhone);
+                myobject.put("name", mName);
+            }
+            catch (JSONException e){
+                e.printStackTrace();
+            }
             JSONObject recievedObject = imeterApi.execute("POST");
             try {
                 if(recievedObject==null){

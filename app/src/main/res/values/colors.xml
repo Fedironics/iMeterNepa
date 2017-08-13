@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="textColor">#444444</color>
     <color name="colorPrimary">#3993DB</color>
     <color name="colorPrimaryDark">#006699</color>
     <color name="colorPrimarytrans">#A03993DB</color>
@@ -7,10 +8,32 @@
     <color name="colorAccent">#da2626</color>
     <color name="plainWhite">#ffffff</color>
     <color name="transparentWhite">#22ffffff</color>
-    <color name="thickTransparentWhite">#55ffffff</color>
+    <color name="thickTransparentWhite">#92ffffff</color>
     <color name="transparent">#00ffffff</color>
     <color name="white">#FFFFFF</color>
     <color name="dark_grey">#424242</color>
     <color name="medium_grey">#9E9E9E</color>
     <color name="button_grey">#757575</color>
+
+    <array name="dot_active">
+        <item>@color/textColor</item>
+        <item>@color/colorPrimary</item>
+        <item>@color/colorPrimaryDark</item>
+        <item>@color/colorPrimarytrans</item>
+        <item>@color/colorPrimaryDarktrans</item>
+        <item>@color/colorAccent</item>
+    </array>
+    <array name="dot_inactive">
+        <item>@color/plainWhite</item>
+        <item>@color/plainWhite</item>
+        <item>@color/plainWhite</item>
+        <item>@color/plainWhite</item>
+        <item>@color/plainWhite</item>
+        <item>@color/plainWhite</item>
+        <item>@color/colorPrimary</item>
+        <item>@color/colorPrimaryDark</item>
+        <item>@color/colorPrimarytrans</item>
+        <item>@color/colorPrimaryDarktrans</item>
+        <item>@color/colorAccent</item>
+    </array>
 </resources>

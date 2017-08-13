@@ -11,11 +11,6 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +37,6 @@ public class iMeterApp extends Application {
     public JSONObject EUserInfo;
     public APIManager imeterapi;
     public static iMeterApp sInstance;
-    private RequestQueue mRequestQueue;
 
     @Override
     public void onCreate() {
@@ -51,32 +45,7 @@ public class iMeterApp extends Application {
         imeterapi = new APIManager(cm);
         Log.e(TAG, "application started");
         EUserInfo = new JSONObject();
-        mRequestQueue = Volley.newRequestQueue(this);
-        sInstance = this;
-        JsonObjectRequest request = new JsonObjectRequest(rtlink+"0349051136-01", null,
-                new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        Log.d(TAG,response.toString());
-                        Log.d(TAG,"volley is bae");
-                    }
-                },
-
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG,"error using volley to get results");
-                    }
-                }
-        );
-        mRequestQueue.add(request);
-        //  getNepaInfo("somethin imaterial");
-    }
-    public RequestQueue getRequestQueue() {
-        return mRequestQueue;
+              //  getNepaInfo("somethin imaterial");
     }
 
 

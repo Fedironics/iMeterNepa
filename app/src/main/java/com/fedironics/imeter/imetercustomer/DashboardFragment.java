@@ -33,9 +33,11 @@ public class DashboardFragment extends Fragment {
 
 
         TextView tx = (TextView)myFrag.findViewById(R.id.balance_text);
+        TextView money = (TextView)myFrag.findViewById(R.id.balance_value);
         Typeface custom_font = Typeface.createFromAsset(getActivity().getAssets(),
                 "raleway_thin.ttf");
         tx.setTypeface(custom_font);
+        money.setTypeface(custom_font);
 
         chart = (BarChart) myFrag.findViewById(R.id.bar_chart);
         initChart();

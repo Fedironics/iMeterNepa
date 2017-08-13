@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="places">
-        <item>Palais Garnie</item>
+        <item>Directive To Stop Estimated Bill Payment Not Applicable To Residential Customers – Discos</item>
         <item>Piazza del Duomo</item>
         <item>Manhattan</item>
         <item>Senso-ji</item>
@@ -9,8 +9,7 @@
         <item>Table Mountain</item>
     </string-array>
     <string-array name="place_desc">
-        <item>The Palais Garnier which locates in Paris was built from 1861 for
-        the Paris Opera.
+        <item>The Association of Nigerian Electricity Distributors says the directive by the Nigerian Electricity Regulatory Commission to consumers not to
         </item>
         <item>Piazza del Duomo the cathedral which locates in Florence.</item>
         <item>Manhattan is the district in New York City</item>
@@ -19,12 +18,23 @@
         <item>Table Mountain is mountain and park locates in Cape Town, South Africa.</item>
     </string-array>
     <string-array name="place_details">
-        <item>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-        deserunt mollit anim id est laborum.
+        <item>The Association of Nigerian Electricity Distributors says the directive by the Nigerian Electricity Regulatory Commission to consumers not to pay estimated electricity billings only applies to Maximum Demand customers and not residential.
+
+The Chief Executive Officer of ANED, Azu Obiaya, made the clarification in an interview with the News Agency of Nigeria in Abuja on Sunday. Maximum Demand customers are commercial and industrial customers who consume high levels of electricity and contribute substantially to the revenues of distribution companies.
+
+The consumption threshold for MD customers is 45KVA. MD meters are connected on the 11Kv (high tension wire) electricity lines, mostly on dedicated transformers. The customers include heavy users of electricity like commercial business plazas, large films and small scale industries among others.
+
+NERC had in June 2016 issued a directive to distribution companies for all MD customers to be metered by November 30, 2016. Following the expiration of the deadline, it further directed that any MD customer that was not metered by March 1 shall not pay any electricity bill presented by a distribution company on the basis of estimated billing methodology.
+
+It also said that no distribution company shall disconnect any MD customer that was not metered by March 1 on the basis of the customer’s refusal to pay a bill issued after the compliance deadline on the basis of estimated billing methodology. The commission had also urged any MD customer not metered by March 1 to notify the commission directly.
+
+Obiaya said: \“We recognise that our residential consumers will be interested in this notice thinking that it applies to them. “In their need for meters, and we recognise that everyone will like to be metered, we are working toward that, but this time, that notice by NERC is specific for maximum demand customers. \“Yes, it is a challenge, but we are working hard to ensure that we meter all the MD customers to eliminate issues associated with estimated billing that those customers have.”
+
+Obiaya said the DisCos had substantially metered MD customers, adding that the mass metering of residential consumers was ongoing. He said it was also in the interest of the DisCos to meter all MD customers and other categories of customers in the country. Obiaya explained: “So our expectation is that the metering of MD customers comprehensively is been completed at this time. \“I know in my various discussions with the DisCos, with respect to the deadline we have been given by NERC, it is in our interest to essentially meter all of our MD customers.”
+
+The ANED CEO called on Nigerians to support the DisCos to comprehensively meter all residential customers by fulfilling their obligations of payment of electricity bills. Obiaya said that the DisCos were committed to delivering quality electricity supply to all categories of customers. He said: “We would urge them to please meet their obligation as residential customers; we will also like to say to them, we understand the need for them all to be metered.
+
+\“The DisCos had continued to work very hard to meter all their customers, but we must all fulfill our own responsibility as residential customers by meeting our electricity payment obligation.\”
         </item>
         <item>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
         eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis

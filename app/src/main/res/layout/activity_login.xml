@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:id="@+id/login_layout"
     android:background="@drawable/background7"
     tools:context="com.fedironics.imeter.imetercustomer.LoginActivity">
 
@@ -19,8 +20,8 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:orientation="vertical"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:orientation="vertical">
         <!-- Login progress -->
         <ProgressBar
             android:id="@+id/login_progress"
@@ -31,8 +32,9 @@
             android:visibility="gone" />
 
         <ImageView
+            android:id="@+id/eedc_logo"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="118dp"
             app:srcCompat="@drawable/s5_logo"
             android:paddingLeft="82dp"
             android:gravity="right"
@@ -44,33 +46,25 @@
             style="@style/transparent_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableTop="@android:drawable/sym_action_email"
+            android:drawableLeft="@android:drawable/sym_action_email"
             android:hint="@string/prompt_email"
             android:inputType="textEmailAddress"
-            android:maxLines="1"
-            android:gravity="center"
-            />
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/password"
             style="@style/transparent_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableTop="@android:drawable/ic_lock_idle_lock"
-            android:gravity="center"
+            android:drawableLeft="@android:drawable/ic_lock_idle_lock"
             android:hint="@string/prompt_password"
-            android:imeActionId="@+id/login"
-            android:imeActionLabel="@string/action_sign_in_short"
-            android:imeOptions="actionUnspecified"
             android:inputType="textPassword"
-            android:maxLines="1"
-            android:shadowColor="@color/plainWhite"
-            android:textColorHighlight="@color/plainWhite"/>
+            android:maxLines="1"/>
 
 
         <Button
             android:id="@+id/email_sign_in_button"
-            style="@style/round_button"
+            style="@style/square_transparent_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/action_sign_in"

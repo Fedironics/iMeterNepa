@@ -5,9 +5,9 @@ android {
     buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.fedironics.imeter.imetercustomer"
-        renderscriptTargetApi 25
+        renderscriptTargetApi 18
         renderscriptSupportModeEnabled true
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -36,7 +36,6 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-vector-drawable:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.mcxiaoke.volley:library:1.0.+'
         compile 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
     testCompile 'junit:junit:4.12'
 }

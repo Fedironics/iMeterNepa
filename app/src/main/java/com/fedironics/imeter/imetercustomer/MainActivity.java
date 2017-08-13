@@ -23,9 +23,18 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public boolean isComplaint = false;
+    private IntroManager introManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        introManager = new IntroManager(this);
+        if(introManager.Check()){
+            introManager.setFirst(false);
+            Intent i = new Intent(MainActivity.this,WelcomeScreen.class);
+            startActivity(i);
+            finish();
+        }
         if(!isLogged()){
 //            Intent intent = new Intent(this,LoginActivity.class);
 //            startActivity(intent);
