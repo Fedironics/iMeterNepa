@@ -261,31 +261,8 @@ public class LoginActivity extends AppCompatActivity  {
         @Override
         protected Boolean doInBackground(Void... params) {
             iMeterApp myApp = (iMeterApp)getApplicationContext();
-            myApp.imeterapi.addServerCredentials("users");
-            myApp.imeterapi.addPostValue("method","authenticate");
-            myApp.imeterapi.addPostValue("email",mEmail);
-            myApp.imeterapi.addPostValue("password",mPassword);
-            JSONObject recievedObject = myApp.imeterapi.execute("POST");
-            try {
-                if(recievedObject==null){
-                    mssg = "server response empty";
-                    return false;
-                }
-                else if(recievedObject.has("error")){
-                    mssg = recievedObject.getString("error");
-                    return false;
-                }
-                else {
-                    return  myApp.saveUser(recievedObject);
-
-                }
-            }
-            catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            mssg= "Unable to recieve data";
-            return false;
+            mssg = myApp.getUserInfo(mEmail,mPassword);
+            return myApp.user.isUserGotten();
         }
 
         @Override

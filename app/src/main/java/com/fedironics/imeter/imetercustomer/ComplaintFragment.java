@@ -56,7 +56,7 @@ public class ComplaintFragment extends Fragment {
         return myview;
     }
     public void setDefaults(){
-            addressE.setText(myApp.getStringInfo("address1"));
+            addressE.setText(myApp.user.address1);
 
     }
 
@@ -71,25 +71,25 @@ public class ComplaintFragment extends Fragment {
         String occurence_time = occurenceTime.getText().toString();
         String description = Description.getText().toString();
         int severity = Severity.getProgress();
-        myApp.imeterapi.addServerCredentials("complaint");
-        myApp.addDefaultParams();
-        myApp.addPostParam("title",title);
-        myApp.addPostParam("district",district);
-        myApp.addPostParam("duration",duration);
-        myApp.addPostParam("frequency",frequency);
-        myApp.addPostParam("address",address);
-        myApp.addPostParam("occurence_time",occurence_time);
-        myApp.addPostParam("decription",description);
-        myApp.addPostParam("severity",String.valueOf(severity));
-        myApp.addPostParam("method","create");
+        iMeterApp myApp = (iMeterApp)getActivity().getApplicationContext();
+        final APIManager api = myApp.getAPIManager();
+        api.addServerCredentials("complaint");
+        api.addDefaultPostValues();
+        api.addPostValue("title",title);
+        api.addPostValue("district",district);
+        api.addPostValue("duration",duration);
+        api.addPostValue("frequency",frequency);
+        api.addPostValue("address",address);
+        api.addPostValue("occurence_time",occurence_time);
+        api.addPostValue("decription",description);
+        api.addPostValue("severity",String.valueOf(severity));
+        api.addPostValue("method","create");
         new Thread(){
             @Override
             public void run() {
-                myApp.imeterapi.execute("POST");
+                api.execute("POST");
             }
         }.start();
-
-
 
         Log.d(iMeterApp.TAG,"complaining");
     }

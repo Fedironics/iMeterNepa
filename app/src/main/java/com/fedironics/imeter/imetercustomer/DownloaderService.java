@@ -53,7 +53,7 @@ public class DownloaderService extends Service {
                 try {
                     Log.d(iMeterApp.TAG, "Updater ran");
                     iMeterApp myApp = (iMeterApp)getApplicationContext();
-                    APIManager myApi = (APIManager)myApp.imeterapi;
+                    APIManager myApi = (APIManager)myApp.getAPIManager();
                     myApi.addServerCredentials("posts");
                     JSONObject result = myApi.execute("GET");
                     Log.d(iMeterApp.TAG,result.toString());

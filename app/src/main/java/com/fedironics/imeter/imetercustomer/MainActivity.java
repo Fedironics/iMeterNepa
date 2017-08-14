@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity
 
     public void logout(){
         iMeterApp myApp = (iMeterApp)getApplicationContext();
-        myApp.displayNotification();
+        myApp.displayNotification("Title Of Notification","Body of Notification",R.drawable.c,"Sticker");
         //TODO : logout and remove preference files
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);

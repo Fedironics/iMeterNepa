@@ -12,7 +12,6 @@ import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,45 +20,35 @@ import org.json.JSONObject;
  */
 
 public class iMeterApp extends Application {
-    public static final String TAG = "customtag";
-    String rtlink = "https://ekedp.com/ajax/accountDetail/";
+    public  ConnectivityManager cm;
+    public  User user;
+
+    public static final String TAG = "EEDC";
+    public final String EEDCRootLink = "https://ekedp.com/ajax/accountDetail/";
+    public final String serverRootLink ="http://inkanimation.com/imeterApi/";
 
     private NotificationManager mNotificationManager;
     private int notificationID = 100;
     private int numMessages = 0;
 
 
-
-    public JSONObject EEDCInfo ;
-    public JSONObject userInfo;
-    public String suserInfo;
-    public String SEEDCInfo ;
-    public JSONObject EUserInfo;
-    public APIManager imeterapi;
-    public static iMeterApp sInstance;
-
     @Override
     public void onCreate() {
         super.onCreate();
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
-        imeterapi = new APIManager(cm);
+        cm = (ConnectivityManager) getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
+        user = new User();
         Log.e(TAG, "application started");
-        EUserInfo = new JSONObject();
-              //  getNepaInfo("somethin imaterial");
     }
 
+    public APIManager getAPIManager(){
+        return new APIManager(cm);
+    }
 
-    public JSONObject simpleApiGet(String link) {
+    public JSONObject simpleAPIGet(String link) {
         Log.d(TAG, "trying to get " + link);
-        imeterapi.setLink(link);
-        try {
-            return imeterapi.execute("GET");
-
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            Log.d(TAG, "empty result");
-        }
-        return imeterapi.execute("GET");
+        APIManager api = getAPIManager();
+        api.setLink(link);
+        return api.execute("GET");
     }
 
     public void getNepaInfo(String cust_acc_no) {
@@ -69,10 +58,10 @@ public class iMeterApp extends Application {
         new Thread() {
             public void run() {
                 try {
+                    //TODO : test the reception of account number
                     String cust_acc_no = "0349051136-01";
-                    EEDCInfo = simpleApiGet(rtlink + cust_acc_no);
-                    saveEEDCInfo(EEDCInfo);
-                    SEEDCInfo = EEDCInfo.toString();
+                    JSONObject EEDCInfo = simpleAPIGet(EEDCRootLink + cust_acc_no);
+                    user.setEEDC(EEDCInfo);
                 }
                 catch (NullPointerException e){
                     e.printStackTrace();
@@ -83,110 +72,40 @@ public class iMeterApp extends Application {
         }.start();
 
     }
-    public void newPostRequest(String request){
 
-        imeterapi.addServerCredentials(request);
-        imeterapi.addDefaultPostValues();
-    }
-    public APIManager addPostParam(String key, String value){
-        imeterapi.addPostValue(key,value);
-        return imeterapi;
-    }
-
-    public String getStringInfo(String key){
-        if(EEDCInfo!=null) {
-
-            Log.d(iMeterApp.TAG,"EEDC info is not null");
-            try {
-                return EUserInfo.getString(key);
-            } catch (JSONException e) {
-                e.printStackTrace();
-                Log.e(iMeterApp.TAG, "Trying to get a non existent string");
-            }
-        }
-        return "";
-    }
-    public void saveEEDCInfo(JSONObject recievedData){
-        //TODO: save all EEDC data linearly here
+    public String getUserInfo(final String email, final String password) {
         try {
-            String result =recievedData.getString("result");
-            JSONObject resultObject = new JSONObject(result);
-            JSONArray accountDetailArray = resultObject.getJSONArray("accounts");
-            JSONObject accountDetail = accountDetailArray.getJSONObject(0);
-            String accountNumber = accountDetail.getString("accountNumber");
-            String address1 = accountDetail.getString("address1");
-            String businessDistrict = accountDetail.getString("businessDistrict");
-            int customerId = accountDetail.getInt("customerId");
-            String name = accountDetail.getString("name");
-
-            EUserInfo.put("accountNumber",accountNumber);
-            EUserInfo.put("address1",address1);
-            EUserInfo.put("businessDistrict",businessDistrict);
-            EUserInfo.put("customerId",customerId);
-            EUserInfo.put("name",name);
+            Log.e(iMeterApp.TAG,"getting user info");
+            APIManager api = getAPIManager();
+            api.setLink(serverRootLink+"users");
+            api.addPostValue("special","authenticate");
+            api.addPostValue("email",email);
+            api.addPostValue("password",password);
+            JSONObject UserInfo = api.execute("POST");
+            return user.setUser(UserInfo);
         }
-        catch (JSONException e){
-            Log.e(iMeterApp.TAG,"field doesnt exist in json object");
+        catch (NullPointerException e){
             e.printStackTrace();
+            Log.d(iMeterApp.TAG,"EEDCINfo is empty");
+            return "Nothing was gotten from server";
         }
 
     }
 
-
-    public void addDefaultParams(){
-        SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
-        //  addPostParam("user_id",sharedPref.getInt("user_id",0));
-
-        addPostParam("name",getStringInfo("name"));
-        addPostParam("phone",getStringInfo("phone"));
-        addPostParam("email",getStringInfo("email"));
-        addPostParam("accountNumber",getStringInfo("accountNumber"));
-
-    }
-    public boolean saveUser(JSONObject recievedObject) {
-        //TODO : saving user data should come after the eedc data in order to overwrite the name
-        try {
-            userInfo = recievedObject;
-            SharedPreferences sharedPref = getSharedPreferences(getResources().getString(R.string.sharedPref), 0);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("name", recievedObject.getString("name"));
-            editor.putInt("user_id", recievedObject.getInt("id"));
-            editor.putString("phone", recievedObject.getString("phone"));
-            editor.putString("email", recievedObject.getString("email"));
-            editor.putString("password", recievedObject.getString("password"));
-
-            EUserInfo.put("name",recievedObject.getString("name"));
-            EUserInfo.put("phone",recievedObject.getString("phone"));
-            EUserInfo.put("email",recievedObject.getString("email"));
-            EUserInfo.put("password",recievedObject.getString("password"));
-            EUserInfo.put("user_id",recievedObject.getInt("id"));
-
-
-            //Intent toMain = new Intent(this,MainActivity.class);
-            //startActivity(toMain);
-            editor.apply();
-            return true;
-        } catch (JSONException e) {
-            Log.e(iMeterApp.TAG, "unable to parse JSON");
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public void displayNotification() {
+    public void displayNotification(String title, String desc, int image,String sticker) {
         Log.i("Start", "notification");
       /* Invoking the default notification service */
         NotificationCompat.Builder  mBuilder =
                 new NotificationCompat.Builder(this);
-        mBuilder.setContentTitle("New Message");
-        mBuilder.setContentText("You've received new message.");
-        mBuilder.setTicker("New Message Alert!");
-        mBuilder.setSmallIcon(R.drawable.a_avator);
+        mBuilder.setContentTitle(title);
+        mBuilder.setContentText(desc);
+        mBuilder.setTicker(sticker);
+        mBuilder.setSmallIcon(image);
       /* Increase notification number every time a new notification arrives */
         mBuilder.setNumber(++numMessages);
       /* Creates an explicit intent for an Activity in your app */
         Intent resultIntent = new Intent(this, NotificationView.class);
-      TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addParentStack(NotificationView.class);
       /* Adds the Intent that starts the Activity to the top of the stack */
         stackBuilder.addNextIntent(resultIntent);
@@ -201,9 +120,6 @@ public class iMeterApp extends Application {
       /* notificationID allows you to update the notification later on. */
         mNotificationManager.notify(notificationID, mBuilder.build());
     }
-
-
-
 
 
 

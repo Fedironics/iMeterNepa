@@ -301,7 +301,7 @@ public class RegisterActivity extends AppCompatActivity  {
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
             iMeterApp myApp = (iMeterApp)getApplicationContext();
-            APIManager imeterApi =myApp.imeterapi;
+            APIManager imeterApi =myApp.getAPIManager();
             imeterApi.addServerCredentials("users");
             JSONObject myobject = new JSONObject();
             try {
@@ -324,7 +324,8 @@ public class RegisterActivity extends AppCompatActivity  {
                     return false;
                 }
                 else {
-                    if(myApp.saveUser(recievedObject)){
+                    myApp.user.setUser(recievedObject);
+                    if(myApp.user.isUserGotten()){
                         mssg = "Succesful Login";
                         return true;
                     };

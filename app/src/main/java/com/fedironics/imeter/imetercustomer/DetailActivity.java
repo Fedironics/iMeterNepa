@@ -65,8 +65,8 @@ public class DetailActivity extends AppCompatActivity {
         TypedArray placePictures = resources.obtainTypedArray(R.array.places_picture);
         ImageView placePicutre = (ImageView) findViewById(R.id.image);
         placePicutre.setImageDrawable(placePictures.getDrawable(postion % placePictures.length()));
-         comment_form = (EditText)findViewById(R.id.comment_text);
-         mybutton = (ImageButton)findViewById(R.id.comment);
+        comment_form = (EditText)findViewById(R.id.comment_text);
+        mybutton = (ImageButton)findViewById(R.id.comment);
         mybutton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -81,15 +81,16 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     public void sendComment(){
-        String comment = comment_form.getText().toString();
-        final iMeterApp myApp = (iMeterApp)getApplicationContext();
-        myApp.newPostRequest("comment");
-        myApp.addPostParam("method","create");
-        myApp.addPostParam("item_id",String.valueOf(postion));
-        myApp.addPostParam("comment",comment);
         new Thread(){
             public void run(){
-                myApp.imeterapi.execute("POST");
+                String comment = comment_form.getText().toString();
+                final iMeterApp myApp = (iMeterApp)getApplicationContext();
+                APIManager api = myApp.getAPIManager();
+                api.addServerCredentials("comments");
+                api.addPostValue("method","create");
+                api.addPostValue("item_id",String.valueOf(postion));
+                api.addPostValue("comment",comment);
+                api.execute("POST");
             }
         }.start();
 
