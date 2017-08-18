@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public boolean isComplaint = false;
     private IntroManager introManager;
+    private de.hdodenhof.circleimageview.CircleImageView profilePix;
+    private TextView profileName;
+    private TextView profileEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        profilePix =(de.hdodenhof.circleimageview.CircleImageView) findViewById(R.id.avatar_main);
+        profileName = (TextView) findViewById(R.id.profile_name);
+        profileEmail = (TextView) findViewById(R.id.profile_email);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +75,7 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragment_container,new DashboardFragment()).commit();
-
+        getSupportActionBar().setTitle(R.string.dashboard_title);
 
     }
 
@@ -127,22 +134,26 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             fragmentManager.beginTransaction().replace(R.id.fragment_container,new DashboardFragment()).commit();
+            getSupportActionBar().setTitle(R.string.dashboard_title);
 
         } else if (id == R.id.nav_pay) {
             fragmentManager.beginTransaction().replace(R.id.fragment_container,new PaymentFragment()).commit();
 
+            getSupportActionBar().setTitle(R.string.payment_title);
         } else if (id == R.id.nav_blog) {
 
             fragmentManager.beginTransaction().replace(R.id.fragment_container,new CardContentFragment()).commit();
 
+            getSupportActionBar().setTitle(R.string.blog_title);
         } else if (id == R.id.nav_complain) {
             fragmentManager.beginTransaction().replace(R.id.fragment_container,new ComplaintFragment()).commit();
             isComplaint = true;
-
+            getSupportActionBar().setTitle(R.string.complaint_title);
         } else if (id == R.id.nav_settings) {
             fragmentManager.beginTransaction().replace(R.id.fragment_container,new Fragment()).commit();
             normalFragmentManager.beginTransaction().replace(R.id.fragment_container,new SettingsFragment()).commit();
 
+            getSupportActionBar().setTitle(R.string.settings_title);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
