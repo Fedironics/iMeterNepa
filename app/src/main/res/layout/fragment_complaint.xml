@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/complaint_scroll_view"
     android:padding="0dp"
     android:background="@drawable/background11"
     >
@@ -198,17 +199,6 @@
             android:text="Submit"
             android:clickable="true"
             style="@style/round_button" />
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="3dp" />
-        <Button
-            android:id="@+id/submit_complaint_button_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Submit"
-            android:clickable="true"
-            style="@style/square_transparent_button"
-            />
 
     </LinearLayout>
 
