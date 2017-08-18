@@ -56,7 +56,11 @@ public class ComplaintFragment extends Fragment {
         return myview;
     }
     public void setDefaults(){
+        if(myApp.user.isUserGotten()) {
             addressE.setText(myApp.user.address1);
+
+
+        }
 
     }
 
