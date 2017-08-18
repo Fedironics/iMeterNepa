@@ -1,5 +1,8 @@
 package com.fedironics.imeter.imetercustomer;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 
@@ -52,6 +57,10 @@ public class ComplaintFragment extends Fragment {
         occurenceTime = (EditText)myview.findViewById(R.id.occurence_time);
         Severity = (SeekBar)myview.findViewById(R.id.severity);
         Description = (EditText)myview.findViewById(R.id.decription);
+        ScrollView mylayout = (ScrollView) myview.findViewById(R.id.complaint_scroll_view);
+        Bitmap resultBmp = BlurBuilder.blur(getContext(), BitmapFactory.decodeResource(getResources(),R.drawable.background11));
+        mylayout.setBackground( new BitmapDrawable( getResources(), resultBmp ) );
+
         setDefaults();
         return myview;
     }
