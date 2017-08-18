@@ -93,11 +93,11 @@ public class APIManager {
         paramCount = 0;
     }
 
-    public void addServerCredentials(String request){
+    public APIManager addServerCredentials(String request){
         Log.d(iMeterApp.TAG," default api credentials added");
         emptyQuery();
         setLink("http://inkanimation.com/imeterApi/"+request);
-
+        return this;
     }
 
     public JSONObject execute(String method){

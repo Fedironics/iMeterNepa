@@ -1,9 +1,11 @@
 package com.fedironics.imeter.imetercustomer;
 
+import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +32,6 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myFrag = inflater.inflate(R.layout.dashboard,container,false);
-
 
         TextView tx = (TextView)myFrag.findViewById(R.id.balance_text);
         TextView money = (TextView)myFrag.findViewById(R.id.balance_value);

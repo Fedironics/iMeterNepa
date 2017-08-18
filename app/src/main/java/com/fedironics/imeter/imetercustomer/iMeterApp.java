@@ -23,14 +23,14 @@ public class iMeterApp extends Application {
     public  ConnectivityManager cm;
     public  User user;
 
-    public static final String TAG = "EEDC";
+    public static final String TAG = "customtag";
     public final String EEDCRootLink = "https://ekedp.com/ajax/accountDetail/";
     public final String serverRootLink ="http://inkanimation.com/imeterApi/";
 
     private NotificationManager mNotificationManager;
     private int notificationID = 100;
     private int numMessages = 0;
-
+    public static iMeterApp instance;
 
     @Override
     public void onCreate() {
@@ -38,6 +38,8 @@ public class iMeterApp extends Application {
         cm = (ConnectivityManager) getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
         user = new User();
         Log.e(TAG, "application started");
+        instance = this;
+        getNepaInfo("something");
     }
 
     public APIManager getAPIManager(){

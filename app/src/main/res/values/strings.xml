@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">iMeter Customer</string>
 
+    <!-- Fragment Titles -->
+    <string name="dashboard_title">My Dashboard</string>
+    <string name="payment_title">Make Payment</string>
+    <string name="blog_title">Energy Blog</string>
+    <string name="settings_title">My Profile</string>
+    <string name="complaint_title">Make Complaint</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
