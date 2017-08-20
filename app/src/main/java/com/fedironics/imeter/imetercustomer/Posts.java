@@ -10,4 +10,7 @@ public class Posts {
     public String body;
     public String added;
     public int views;
+    public int likes;
+    public String imageSrc;
+
 }
