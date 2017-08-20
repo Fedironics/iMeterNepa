@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         introManager = new IntroManager(this);
-        if(introManager.Check()){
+        if(!introManager.Check()){
             introManager.setFirst(false);
             Intent i = new Intent(MainActivity.this,WelcomeScreen.class);
             startActivity(i);
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        //open the dashboard fragment
+        //open the fragment_dashboard fragment
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragment_container,new DashboardFragment()).commit();
@@ -128,9 +128,6 @@ public class MainActivity extends AppCompatActivity
         isComplaint = false;
         int id = item.getItemId();
         FragmentManager fragmentManager = getSupportFragmentManager();
-        android.app.FragmentManager normalFragmentManager = getFragmentManager();
-
-        normalFragmentManager.beginTransaction().replace(R.id.fragment_container,new android.app.Fragment()).commit();
 
         if (id == R.id.nav_home) {
             fragmentManager.beginTransaction().replace(R.id.fragment_container,new DashboardFragment()).commit();
@@ -150,9 +147,7 @@ public class MainActivity extends AppCompatActivity
             isComplaint = true;
             getSupportActionBar().setTitle(R.string.complaint_title);
         } else if (id == R.id.nav_settings) {
-            fragmentManager.beginTransaction().replace(R.id.fragment_container,new Fragment()).commit();
-            normalFragmentManager.beginTransaction().replace(R.id.fragment_container,new SettingsFragment()).commit();
-
+            fragmentManager.beginTransaction().replace(R.id.fragment_container,new SettingsFragment()).commit();
             getSupportActionBar().setTitle(R.string.settings_title);
         }
 
