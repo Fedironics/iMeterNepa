@@ -24,7 +24,7 @@ public class BlogFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Myblog = inflater.inflate(R.layout.blog_fragment, container, false);
+        Myblog = inflater.inflate(R.layout.fragment_blog, container, false);
         // Setting ViewPager for each Tabs
         ViewPager viewPager = (ViewPager) Myblog.findViewById(R.id.viewpager);
         setupViewPager(viewPager);

@@ -67,11 +67,13 @@
         <TextView
             android:id="@+id/customer_detail_title"
             android:layout_width="match_parent"
+            style="@style/list_item_style"
             android:layout_height="wrap_content"
             android:text="Customer Details"/>
 
         <TextView
             android:layout_width="match_parent"
+            style="@style/list_item_style"
             android:layout_height="wrap_content"
             android:text="Customer Name"/>
     </LinearLayout>

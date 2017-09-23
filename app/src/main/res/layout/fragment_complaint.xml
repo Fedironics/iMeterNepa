@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="30dp"
-        android:background="@drawable/mywebgradienttrans">
+        android:background="@drawable/more_transparent_blue_gradient">
 
 
         <TextView
@@ -136,7 +136,13 @@
             android:textAllCaps="true"
             android:text="Time Of Occurence"
             android:textColor="@color/plainWhite"/>
-        <EditText
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose Time"
+            style="@style/transparent_edit"
+            android:id="@+id/choose_time"/>
+        <TextView
             android:id="@+id/occurence_time"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"

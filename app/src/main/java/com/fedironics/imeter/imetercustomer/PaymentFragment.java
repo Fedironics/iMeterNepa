@@ -15,7 +15,7 @@ public class PaymentFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        paymentFragment = inflater.inflate(R.layout.payment_fragment,container,false);
+        paymentFragment = inflater.inflate(R.layout.fragment_payment,container,false);
         return paymentFragment;
     }
 }

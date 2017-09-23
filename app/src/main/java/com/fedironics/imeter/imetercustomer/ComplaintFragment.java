@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -31,9 +32,12 @@ import java.util.ArrayList;
 
 public class ComplaintFragment extends Fragment {
     View myview;
-    Button submit;
+    Button submit,chooseTime;
     Spinner titles, districts, durations, frequencies;
-    EditText occurenceTime, Description,addressE;
+    EditText  Description,addressE;
+    TextView occurenceTime;
+    int year_x,month_x,day_x;
+    static final int DIALOG_ID = 0;
     SeekBar Severity;
     BarChart chart;
     public iMeterApp myApp;
@@ -54,7 +58,6 @@ public class ComplaintFragment extends Fragment {
         durations = (Spinner)myview.findViewById(R.id.duration);
         frequencies = (Spinner)myview.findViewById(R.id.frequency);
         addressE = (EditText)myview.findViewById(R.id.addressdesc);
-        occurenceTime = (EditText)myview.findViewById(R.id.occurence_time);
         Severity = (SeekBar)myview.findViewById(R.id.severity);
         Description = (EditText)myview.findViewById(R.id.decription);
         ScrollView mylayout = (ScrollView) myview.findViewById(R.id.complaint_scroll_view);
@@ -72,7 +75,24 @@ public class ComplaintFragment extends Fragment {
         }
 
     }
+    public void formFillState(){
 
+
+    }
+public void datePick(){
+
+    chooseTime= (Button)myview.findViewById(R.id.choose_time);
+    occurenceTime = (TextView)myview.findViewById(R.id.occurence_time);
+    chooseTime.setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getActivity().showDialog(DIALOG_ID);
+                }
+            }
+    );
+
+}
 
 
     public void complain(){

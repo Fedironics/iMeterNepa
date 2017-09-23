@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@drawable/mygradient">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="17dp"
+            android:src="@drawable/c"
+            android:layout_weight="1"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:padding="15dp"
+        android:orientation="vertical"
+        android:background="@drawable/mywebgradienttrans"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NAME"
+            android:textAllCaps="true"
+            android:textSize="13sp"
+            android:textColor="@color/plainWhite"/>
+
+        <EditText
+            android:id="@+id/customer_name"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="EKENE MADUNAGU"
+            style="@style/transparent_edit"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textAllCaps="true"
+            android:textSize="13sp"
+            android:textColor="@color/plainWhite"/>
+
+        <EditText
+            android:id="@+id/customer_email"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="email@domain.com"
+            style="@style/transparent_edit"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="phone"
+            android:textAllCaps="true"
+            android:textSize="13sp"
+            android:textColor="@color/plainWhite"/>
+
+        <EditText
+            android:id="@+id/customer_phone"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="+234812345678"
+            style="@style/transparent_edit"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="EEDC CUSTOMER NUMBER"
+            android:textAllCaps="true"
+            android:textSize="13sp"
+            android:textColor="@color/plainWhite"/>
+
+        <EditText
+            android:id="@+id/customer_no"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="+234812345678"
+            style="@style/transparent_edit"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/eedc_info_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+
+
+</LinearLayout>

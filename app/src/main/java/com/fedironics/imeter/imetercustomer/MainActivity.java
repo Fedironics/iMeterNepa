@@ -1,6 +1,8 @@
 package com.fedironics.imeter.imetercustomer;
 
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,12 +31,13 @@ public class MainActivity extends AppCompatActivity
     private de.hdodenhof.circleimageview.CircleImageView profilePix;
     private TextView profileName;
     private TextView profileEmail;
+    static final int DIALOG_ID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         introManager = new IntroManager(this);
-        if(!introManager.Check()){
+        if( introManager.Check()){
             introManager.setFirst(false);
             Intent i = new Intent(MainActivity.this,WelcomeScreen.class);
             startActivity(i);
@@ -72,9 +76,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //open the fragment_dashboard fragment
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container,new DashboardFragment()).commit();
+        goToFragment(new DashboardFragment());
         getSupportActionBar().setTitle(R.string.dashboard_title);
 
     }
@@ -88,6 +90,8 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
+
 
     public boolean isLogged(){
 
@@ -117,8 +121,12 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.logout) {
             logout();
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    public void goToFragment(Fragment f){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container,f).commit();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -127,30 +135,31 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         isComplaint = false;
         int id = item.getItemId();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
-        if (id == R.id.nav_home) {
-            fragmentManager.beginTransaction().replace(R.id.fragment_container,new DashboardFragment()).commit();
-            getSupportActionBar().setTitle(R.string.dashboard_title);
-
-        } else if (id == R.id.nav_pay) {
-            fragmentManager.beginTransaction().replace(R.id.fragment_container,new PaymentFragment()).commit();
-
-            getSupportActionBar().setTitle(R.string.payment_title);
-        } else if (id == R.id.nav_blog) {
-
-            fragmentManager.beginTransaction().replace(R.id.fragment_container,new CardContentFragment()).commit();
-
-            getSupportActionBar().setTitle(R.string.blog_title);
-        } else if (id == R.id.nav_complain) {
-            fragmentManager.beginTransaction().replace(R.id.fragment_container,new ComplaintFragment()).commit();
-            isComplaint = true;
-            getSupportActionBar().setTitle(R.string.complaint_title);
-        } else if (id == R.id.nav_settings) {
-            fragmentManager.beginTransaction().replace(R.id.fragment_container,new SettingsFragment()).commit();
-            getSupportActionBar().setTitle(R.string.settings_title);
+        switch (id) {
+            case R.id.nav_home:
+                goToFragment(new DashboardFragment());
+                getSupportActionBar().setTitle(R.string.dashboard_title);
+                break;
+            case R.id.nav_pay:
+                goToFragment(new PaymentFragment());
+                getSupportActionBar().setTitle(R.string.payment_title);
+                break;
+            case R.id.nav_blog:
+                goToFragment(new CardContentFragment());
+                getSupportActionBar().setTitle(R.string.blog_title);
+                break;
+            case R.id.nav_complain:
+                goToFragment(new ComplaintFragment());
+                isComplaint = true;
+                getSupportActionBar().setTitle(R.string.complaint_title);
+                break;
+            case R.id.nav_settings:
+                goToFragment(new SettingsFragment());
+                getSupportActionBar().setTitle(R.string.settings_title);
+                break;
+            default:
+                break;
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

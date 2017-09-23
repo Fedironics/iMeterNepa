@@ -7,6 +7,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.provider.MediaStore;
@@ -35,6 +38,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -69,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity  {
     private EditText mPasswordView;
     private EditText mNameView;
     private EditText mPhoneView;
-    private ImageButton pickImage;
+    private de.hdodenhof.circleimageview.CircleImageView pickImage;
     private View mProgressView;
     private View mLoginFormView;
     public String email;
@@ -86,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         // Set up the login form.
-        pickImage = (ImageButton)findViewById(R.id.profile_pix) ;
+        pickImage = (de.hdodenhof.circleimageview.CircleImageView)findViewById(R.id.profile_pix) ;
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mNameView = (EditText) findViewById(R.id.name_reg);
         mPhoneView = (EditText) findViewById(R.id.phone);
@@ -102,6 +106,9 @@ public class RegisterActivity extends AppCompatActivity  {
                 return false;
             }
         });
+        LinearLayout mylayout = (LinearLayout) findViewById(R.id.register_layout);
+        Bitmap resultBmp = BlurBuilder.blur(this, BitmapFactory.decodeResource(getResources(),R.drawable.background8));
+        mylayout.setBackground( new BitmapDrawable( getResources(), resultBmp ) );
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -189,10 +196,10 @@ public class RegisterActivity extends AppCompatActivity  {
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-       email = mEmailView.getText().toString();
-       password = mPasswordView.getText().toString();
+        email = mEmailView.getText().toString();
+        password = mPasswordView.getText().toString();
         phone = mPhoneView.getText().toString();
-         user_name = mNameView.getText().toString();
+        user_name = mNameView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -301,8 +308,8 @@ public class RegisterActivity extends AppCompatActivity  {
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
             iMeterApp myApp = (iMeterApp)getApplicationContext();
-            APIManager imeterApi =myApp.getAPIManager();
-            imeterApi.addServerCredentials("users");
+            APIManager api =myApp.getAPIManager();
+            api.addServerCredentials("users");
             JSONObject myobject = new JSONObject();
             try {
                 myobject.put("email", mEmail);
@@ -313,7 +320,7 @@ public class RegisterActivity extends AppCompatActivity  {
             catch (JSONException e){
                 e.printStackTrace();
             }
-            JSONObject recievedObject = imeterApi.execute("POST");
+            JSONObject recievedObject = api.execute("POST");
             try {
                 if(recievedObject==null){
                     mssg = "server response empty";

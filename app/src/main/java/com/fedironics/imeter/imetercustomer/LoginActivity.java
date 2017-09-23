@@ -127,7 +127,8 @@ public class LoginActivity extends AppCompatActivity  {
         mProgressView = findViewById(R.id.login_progress);
 
         LinearLayout mylayout = (LinearLayout) findViewById(R.id.login_layout);
-        Bitmap resultBmp = BlurBuilder.blur(this, BitmapFactory.decodeResource(getResources(),R.drawable.background7));
+        Drawable img = mylayout.getBackground();
+        Bitmap resultBmp = BlurBuilder.blur(this, BitmapFactory.decodeResource(getResources(),R.drawable.background5));
         mylayout.setBackground( new BitmapDrawable( getResources(), resultBmp ) );
 
     }

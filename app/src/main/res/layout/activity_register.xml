@@ -1,7 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/register_layout"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background8"
     android:orientation="vertical"
 
@@ -13,7 +15,7 @@
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/mywebgradienttrans"
+        android:background="#40000000"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
@@ -32,13 +34,19 @@
                 android:layout_height="match_parent"
                 android:visibility="gone" />
 
-            <ImageButton
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_pix"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@color/transparent"
+                android:layout_marginBottom="20dp"
+                app:civ_border_width="1dp"
+                android:alpha=".6"
+                app:civ_border_color="@color/thickTransparentWhite"
                 android:layout_gravity="center"
-                android:src="@android:drawable/ic_menu_camera"></ImageButton>
+                android:src="@drawable/avatar_main">
+
+
+            </de.hdodenhof.circleimageview.CircleImageView>
 
 
             <EditText

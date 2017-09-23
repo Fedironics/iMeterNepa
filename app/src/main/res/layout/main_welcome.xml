@@ -16,8 +16,7 @@
         android:id="@+id/viewpager_welcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <include
-        layout="@layout/welcome1" />
+
 
     <LinearLayout
         android:orientation="horizontal"

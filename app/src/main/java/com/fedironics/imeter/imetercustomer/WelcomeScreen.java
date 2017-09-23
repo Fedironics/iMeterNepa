@@ -61,41 +61,23 @@ public class WelcomeScreen extends Activity {
         skip = (Button)findViewById(R.id.button_skip);
         next = (Button)findViewById(R.id.button_next);
 
-
-        mylayout = (RelativeLayout) findViewById(R.id.relative_welcome);
-
         layouts = new int[]{R.layout.welcome1,R.layout.welcome2,R.layout.welcome3,R.layout.welcome4};
         backgrounds =new int[]{R.drawable.background2,R.drawable.background3,R.drawable.background4,R.drawable.background5};
-        titles= new String[]{"Welcome to EEDC Utility", "Pay bills Easily","title string 3","title string 4"};
-        desc= new String[]{
-                "Unique, Usablity, Utility",
-                "Pay bills Easily",
-                "desc string 3",
-                "desc string 4"
-        };
+
         changeStatusBarColor();
 
-        custom_font = Typeface.createFromAsset(getAssets(), "raleway_thin.ttf");
-
-        tx= (TextView)findViewById(R.id.title_text);
-        desc_string = (TextView)findViewById(R.id.text_desc_welcome);
-        tx.setTypeface(custom_font);
-        desc_string.setTypeface(custom_font);
+        custom_font = Typeface.createFromAsset(getAssets(), "exo_regular.ttf");
 
         viewPagerAdapter = new ViewPagerAdapter();
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(viewListener);
 
         addButtonDots(0);
-        blurView(0);
-
 
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(WelcomeScreen.this,MainActivity.class);
-                startActivity(intent);
-                finish();
+                goToMain();
             }
         });
         next.setOnClickListener(new View.OnClickListener() {
@@ -106,9 +88,7 @@ public class WelcomeScreen extends Activity {
                     viewPager.setCurrentItem(current);
                 }
                 else{
-                    Intent intent = new Intent(WelcomeScreen.this,MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    goToMain();
                 }
             }
         });
@@ -130,14 +110,17 @@ public class WelcomeScreen extends Activity {
         }
 
     }
+    public void goToMain(){
+        Intent intent = new Intent(WelcomeScreen.this,MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
     private void blurView(int position){
-      //  tx.setText(titles[position]);
-   //     desc_string.setText(desc[position]);
+         tx.setTypeface(custom_font);
+        desc_string.setTypeface(custom_font);
 
         Bitmap resultBmp = BlurBuilder.blur(context, BitmapFactory.decodeResource(getResources(),backgrounds[position]));
-        mylayout.setBackground( new BitmapDrawable( getResources(), resultBmp ) );
-
-
+          mylayout.setBackground( new BitmapDrawable( getResources(), resultBmp ) );
     }
     private int getItem(int i)
     {
@@ -160,7 +143,6 @@ public class WelcomeScreen extends Activity {
 
         @Override
         public void onPageSelected(int position) {
-            blurView(position);
             addButtonDots(position);
 
             if(position==layouts.length-1){
@@ -186,7 +168,12 @@ public class WelcomeScreen extends Activity {
         public Object instantiateItem(ViewGroup container, int position) {
             layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View v = layoutInflater.inflate(layouts[position],container,false);
+            tx= (TextView)v.findViewById(R.id.title_text);
+            desc_string = (TextView)v.findViewById(R.id.text_desc_welcome);
+            mylayout = (RelativeLayout)v.findViewById(R.id.relative_welcome);
             container.addView(v);
+
+blurView(position);
             return v;
         }
 
