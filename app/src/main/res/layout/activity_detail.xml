@@ -72,19 +72,13 @@
             android:paddingRight="@dimen/md_keylines"
             android:paddingTop="@dimen/md_keylines">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/md_keylines"
-                android:text="Description"
-                android:textColor="?attr/colorAccent"
-                android:textSize="@dimen/article_titles" />
 
             <TextView
                 android:id="@+id/place_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textColor"
+                android:textSize="16sp"
                 tools:text="@string/detail_desc" />
 
             <TextView
@@ -110,72 +104,80 @@
                 android:text="Comments"
                 android:textColor="?attr/colorAccent"
                 android:textSize="@dimen/article_titles" />
-
-
-             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/md_keylines">
-
-                <ImageView
-                    android:id="@+id/comment_avatar"
-                    android:layout_width="@dimen/avator_size"
-                    android:layout_height="@dimen/avator_size"
-                    android:scaleType="centerCrop"
-                    tools:src="@drawable/a_avator" />
-
-                <TextView
-                    android:id="@+id/comment_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/md_keylines"
-                    android:layout_toRightOf="@+id/comment_avatar"
-                    android:textAppearance="?attr/textAppearanceListItem"
-                    android:textSize="@dimen/article_subheading"
-                    tools:text="@string/item_title" />
-
-                <TextView
-                    android:id="@+id/comment_body"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/comment_name"
-                    android:layout_marginLeft="@dimen/md_keylines"
-                    android:layout_toRightOf="@+id/comment_avatar"
-                    android:ellipsize="end"
-                    android:textAppearance="?attr/textAppearanceListItem"
-                    android:textColor="@color/medium_grey"
-                    android:textSize="@dimen/list_body"
-                    tools:text="@string/item_desc" />
-            </RelativeLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/comment_text"
-                    style="@style/chat_textbox"
+                android:paddingBottom="40dp">
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="demotext placed"
-                    android:layout_weight="1"
-                    android:lines="6"
-                    android:inputType="text" />
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/md_keylines">
 
-                <ImageButton
-                    android:id="@+id/comment"
-                    style="@style/commentSendButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="4"
+                    <ImageView
+                        android:id="@+id/comment_avatars"
+                        android:layout_width="@dimen/avator_size"
+                        android:layout_height="@dimen/avator_size"
+                        android:scaleType="centerCrop"
+                        tools:src="@drawable/a_avator" />
 
-                    android:src="@drawable/ic_menu_send" />
+                    <TextView
+                        android:id="@+id/comment_names"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/md_keylines"
+                        android:layout_toRightOf="@+id/comment_avatars"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textSize="@dimen/article_subheading"
+                        tools:text="Commenter Name" />
 
+                    <TextView
+                        android:id="@+id/comment_body"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/comment_names"
+                        android:layout_marginLeft="@dimen/md_keylines"
+                        android:layout_toRightOf="@+id/comment_avatars"
+                        android:ellipsize="end"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textColor="@color/medium_grey"
+                        android:textSize="@dimen/list_body"
+                        tools:text="my comment which is commented" />
+                </RelativeLayout>
             </LinearLayout>
+
         </LinearLayout>
+
+
     </android.support.v4.widget.NestedScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/tile_padding"
+        android:paddingRight="@dimen/tile_padding"
+        android:background="@color/thickTransparentWhite"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/comment_text"
+            style="@style/chat_textbox"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:inputType="text" />
+
+        <ImageButton
+            android:id="@+id/comment"
+            style="@style/commentSendButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="5"
+
+            android:src="@drawable/ic_menu_send" />
+
+    </LinearLayout>
+
 </android.support.design.widget.CoordinatorLayout>
