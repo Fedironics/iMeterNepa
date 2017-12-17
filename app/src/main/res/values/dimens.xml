@@ -42,4 +42,7 @@
         <dimen name="card_image_height">200dp</dimen>
         <dimen name="list_body">14sp</dimen>
         <dimen name="navheader_height">222dp</dimen>
+
+    <!-- custom values -->
+    <dimen name="inputTextSize">12sp</dimen>
 </resources>

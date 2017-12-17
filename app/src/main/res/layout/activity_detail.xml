@@ -71,13 +71,14 @@
             android:paddingLeft="@dimen/article_keylines"
             android:paddingRight="@dimen/md_keylines"
             android:paddingTop="@dimen/md_keylines">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="?attr/colorAccent"
+                android:layout_marginBottom="@dimen/md_keylines"
                 android:text="Description"
-                android:textSize="@dimen/article_titles"
-                android:layout_marginBottom="@dimen/md_keylines" />
+                android:textColor="?attr/colorAccent"
+                android:textSize="@dimen/article_titles" />
 
             <TextView
                 android:id="@+id/place_detail"
@@ -89,25 +90,26 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="?attr/colorAccent"
-                android:text="Location"
-                android:textSize="@dimen/article_titles"
                 android:layout_marginBottom="@dimen/md_keylines"
-                android:layout_marginTop="@dimen/md_keylines" />
+                android:layout_marginTop="@dimen/md_keylines"
+                android:text="Location"
+                android:textColor="?attr/colorAccent"
+                android:textSize="@dimen/article_titles" />
 
             <TextView
                 android:id="@+id/place_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="@string/detail_location" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="?attr/colorAccent"
-                android:text="Comments"
-                android:textSize="@dimen/article_titles"
                 android:layout_marginBottom="@dimen/md_keylines"
-                android:layout_marginTop="@dimen/md_keylines" />
+                android:layout_marginTop="@dimen/md_keylines"
+                android:text="Comments"
+                android:textColor="?attr/colorAccent"
+                android:textSize="@dimen/article_titles" />
 
 
             <RelativeLayout
@@ -129,9 +131,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/md_keylines"
                     android:layout_toRightOf="@+id/comment_avatar"
-                    tools:text="@string/item_title"
                     android:textAppearance="?attr/textAppearanceListItem"
-                    android:textSize="@dimen/article_subheading" />
+                    android:textSize="@dimen/article_subheading"
+                    tools:text="@string/item_title" />
 
                 <TextView
                     android:id="@+id/comment_body"
@@ -140,12 +142,13 @@
                     android:layout_below="@+id/comment_name"
                     android:layout_marginLeft="@dimen/md_keylines"
                     android:layout_toRightOf="@+id/comment_avatar"
-                    android:textColor="@color/medium_grey"
                     android:ellipsize="end"
-                    tools:text="@string/item_desc"
                     android:textAppearance="?attr/textAppearanceListItem"
-                    android:textSize="@dimen/list_body" />
+                    android:textColor="@color/medium_grey"
+                    android:textSize="@dimen/list_body"
+                    tools:text="@string/item_desc" />
             </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -153,18 +156,20 @@
 
                 <EditText
                     android:id="@+id/comment_text"
-                    android:layout_weight="1"
+                    style="@style/chat_textbox"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:inputType="text"/>
+                    android:layout_weight="1"
+                    android:inputType="text" />
+
                 <ImageButton
                     android:id="@+id/comment"
-                    android:layout_weight="3"
+                    style="@style/round_button"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/ic_menu_send"
-                    style="@style/round_button" />
+                    android:layout_weight="3"
+                    android:src="@drawable/ic_menu_send" />
 
             </LinearLayout>
         </LinearLayout>
