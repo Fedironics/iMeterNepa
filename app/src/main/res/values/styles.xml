@@ -77,6 +77,11 @@
         <item name="android:background">@drawable/chattextbox</item>
         <item name="android:paddingLeft">@dimen/inputTextSize</item>
     </style>
+    <style name="commentSendButton">
+        <item name="android:src">@drawable/ic_menu_send</item>
+        <item name="android:background">@drawable/sendbutton</item>
+        <item name="android:textColorPrimary">@color/plainWhite</item>
+    </style>
     <style name="square_transparent_button">
         <item name="android:background">@drawable/transparentbutton</item>
         <item name="android:textColor">@color/thickTransparentWhite</item>
