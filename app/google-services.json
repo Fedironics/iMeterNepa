@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "640201853896",
+    "firebase_url": "https://imeter-f2c7a.firebaseio.com",
+    "project_id": "imeter-f2c7a",
+    "storage_bucket": "imeter-f2c7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640201853896:android:9a4b20f8ef610db3",
+        "android_client_info": {
+          "package_name": "com.fedironics.imeter.imetercustomer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "640201853896-ml81bfoc03sb3afhec7083at9g9nfeq4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLkljwl1iN9obJlccGT_QYsWVpmzkA5sI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

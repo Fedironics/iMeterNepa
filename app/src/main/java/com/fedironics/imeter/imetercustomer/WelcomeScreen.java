@@ -116,11 +116,11 @@ public class WelcomeScreen extends Activity {
         finish();
     }
     private void blurView(int position){
-         tx.setTypeface(custom_font);
+        tx.setTypeface(custom_font);
         desc_string.setTypeface(custom_font);
 
         Bitmap resultBmp = BlurBuilder.blur(context, BitmapFactory.decodeResource(getResources(),backgrounds[position]));
-          mylayout.setBackground( new BitmapDrawable( getResources(), resultBmp ) );
+        mylayout.setBackground( new BitmapDrawable( getResources(), resultBmp ) );
     }
     private int getItem(int i)
     {
@@ -173,7 +173,7 @@ public class WelcomeScreen extends Activity {
             mylayout = (RelativeLayout)v.findViewById(R.id.relative_welcome);
             container.addView(v);
 
-blurView(position);
+            blurView(position);
             return v;
         }
 

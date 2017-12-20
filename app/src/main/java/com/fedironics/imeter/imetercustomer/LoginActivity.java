@@ -46,6 +46,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -80,12 +82,11 @@ public class LoginActivity extends AppCompatActivity  {
     public static final String platform_id = "slkfjdsldjfl";
     public static final String token = "slkfjosfjos";
     public String mssg = "Unable To Log In" ;
-
+    private FirebaseAuth mAuth;
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
 
     // UI references.
     private EditText mEmailView;
@@ -97,6 +98,9 @@ public class LoginActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //Firebase setup
+        mAuth = FirebaseAuth.getInstance();
+
         // Set up the login form.±±
         mEmailView = (EditText) findViewById(R.id.email);
 
@@ -147,9 +151,6 @@ public class LoginActivity extends AppCompatActivity  {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
 
         // Reset errors.
         mEmailView.setError(null);
@@ -188,8 +189,7 @@ public class LoginActivity extends AppCompatActivity  {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password, this);
-            mAuthTask.execute((Void) null);
+            mAuth.signInWithEmailAndPassword(email,password);
         }
     }
 
@@ -243,50 +243,6 @@ public class LoginActivity extends AppCompatActivity  {
 
 
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mEmail;
-        private final String mPassword;
-        private  Context context;
-
-        UserLoginTask(String email, String password, Context context) {
-            mEmail = email;
-            mPassword = password;
-            this.context = context;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            iMeterApp myApp = (iMeterApp)getApplicationContext();
-            mssg = myApp.getUserInfo(mEmail,mPassword);
-            return myApp.user.isUserGotten();
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                Intent intent = new Intent(this.context,MainActivity.class);
-                startActivity(intent);
-                finish();
-            } else {
-                Snackbar.make(mProgressView, mssg, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
-    }
 }
 
